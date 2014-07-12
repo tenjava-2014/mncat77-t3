@@ -34,7 +34,7 @@ Usage
 4. Explore! 'Cause that's the whole fun of it (You spawn on a bedrock chunk, the new terrain is everywhere but there, just tp yourself somewhere or walk off; Downsides to using NMS rather than Bukkit API)
 
 
-This plugin changes up world generation and adds some structures to your world.
+This plugin changes up world generation, tweaks spawn rates and adds some structures to your world.
 Survival is mainly made harder with this.
 
 Look out for:

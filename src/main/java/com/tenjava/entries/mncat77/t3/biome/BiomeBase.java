@@ -15,6 +15,7 @@ import net.minecraft.server.v1_7_R3.EntityChicken;
 import net.minecraft.server.v1_7_R3.EntityCow;
 import net.minecraft.server.v1_7_R3.EntityCreeper;
 import net.minecraft.server.v1_7_R3.EntityEnderman;
+import net.minecraft.server.v1_7_R3.EntityGiantZombie;
 import net.minecraft.server.v1_7_R3.EntityPig;
 import net.minecraft.server.v1_7_R3.EntitySheep;
 import net.minecraft.server.v1_7_R3.EntitySkeleton;
@@ -22,6 +23,7 @@ import net.minecraft.server.v1_7_R3.EntitySlime;
 import net.minecraft.server.v1_7_R3.EntitySpider;
 import net.minecraft.server.v1_7_R3.EntitySquid;
 import net.minecraft.server.v1_7_R3.EntityWitch;
+import net.minecraft.server.v1_7_R3.EntityWither;
 import net.minecraft.server.v1_7_R3.EntityZombie;
 import net.minecraft.server.v1_7_R3.EnumCreatureType;
 import net.minecraft.server.v1_7_R3.EnumTemperature;
@@ -124,6 +126,7 @@ public abstract class BiomeBase {
     protected WorldGenBigTree aA;
     protected WorldGenSwampTree aB;
 
+    //Default Biome Value (unchanged for Plains)
     protected BiomeBase(int id) {
         this.topBlock = Blocks.GRASS;
         this.aj = 0;
@@ -145,17 +148,21 @@ public abstract class BiomeBase {
         this.id = id;
         byId[id] = this;
         this.decorator = this.createBiomeDecorator();
-        this.at.add(new BiomeMeta(EntitySheep.class, 12, 4, 4));
-        this.at.add(new BiomeMeta(EntityPig.class, 10, 4, 4));
-        this.at.add(new BiomeMeta(EntityChicken.class, 10, 4, 4));
-        this.at.add(new BiomeMeta(EntityCow.class, 8, 4, 4));
-        this.as.add(new BiomeMeta(EntitySpider.class, 100, 4, 4));
-        this.as.add(new BiomeMeta(EntityZombie.class, 100, 4, 4));
-        this.as.add(new BiomeMeta(EntitySkeleton.class, 100, 4, 4));
-        this.as.add(new BiomeMeta(EntityCreeper.class, 100, 4, 4));
+
+        //Mobs that can spawn in the biome in 3 categories: Neutral(creature), Hostile(monster) and Ambient
+        this.at.add(new BiomeMeta(EntitySheep.class, 12, 1, 1));
+        this.at.add(new BiomeMeta(EntityPig.class, 10, 1, 1));
+        this.at.add(new BiomeMeta(EntityChicken.class, 10, 1, 1));
+        this.at.add(new BiomeMeta(EntityCow.class, 8, 1, 1));
+        this.as.add(new BiomeMeta(EntitySpider.class, 100, 6, 6));
+        this.as.add(new BiomeMeta(EntityZombie.class, 100, 9, 9));
+        this.as.add(new BiomeMeta(EntitySkeleton.class, 100, 7, 7));
+        this.as.add(new BiomeMeta(EntityCreeper.class, 100, 8, 8));
         this.as.add(new BiomeMeta(EntitySlime.class, 100, 4, 4));
-        this.as.add(new BiomeMeta(EntityEnderman.class, 10, 1, 4));
-        this.as.add(new BiomeMeta(EntityWitch.class, 5, 1, 1));
+        this.as.add(new BiomeMeta(EntityEnderman.class, 80, 3, 7));
+        this.as.add(new BiomeMeta(EntityWitch.class, 60, 4, 6));
+        this.as.add(new BiomeMeta(EntityGiantZombie.class, 13, 1, 1));
+        this.as.add(new BiomeMeta(EntityWither.class, 1, 1, 1));
         this.au.add(new BiomeMeta(EntitySquid.class, 10, 4, 4));
         this.av.add(new BiomeMeta(EntityBat.class, 10, 8, 8));
     }
