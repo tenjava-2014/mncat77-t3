@@ -1,5 +1,6 @@
 package com.tenjava.entries.mncat77.t3.layer;
 
+import com.tenjava.entries.mncat77.t3.biome.BiomeBase;
 import net.minecraft.server.v1_7_R3.EnumGenLayerSpecial;
 
 public abstract class BiomeLayer {
@@ -42,9 +43,9 @@ public abstract class BiomeLayer {
 
         BiomeLayer layer1 = BiomeLayerZoom.zoom(seed - 9, layer, 0);
         BiomeLayer layerCleaner = new BiomeLayerCleaner(seed + 10, layer1);
-        /*BiomeLayer object = new GenLayerBiome(200L, genlayer, worldtype);
+        BiomeLayer object = new BiomeLayerBiome(seed - 10, layer);
 
-         if(!flag) {
+        /*         if(!flag) {
          GenLayer genlayer2 = GenLayerZoom.b(1000L, (GenLayer)object, 2);
 
          object = new GenLayerDesert(1000L, genlayer2);
@@ -74,8 +75,11 @@ public abstract class BiomeLayer {
          GenLayerSmooth genlayersmooth1 = new GenLayerSmooth(1000L, (GenLayer)object);
          GenLayerRiverMix genlayerrivermix = new GenLayerRiverMix(100L, genlayersmooth1, genlayersmooth);
          GenLayerZoomVoronoi genlayerzoomvoronoi = new GenLayerZoomVoronoi(10L, genlayerrivermix);*/
-
         return new BiomeLayer[]{null};
+    }
+
+    protected static boolean isBiomeOcean(int i) {
+        return i == BiomeBase.OCEAN.id || i == BiomeBase.DEEP_OCEAN.id || i == BiomeBase.FROZEN_OCEAN.id;
     }
 
     /**
