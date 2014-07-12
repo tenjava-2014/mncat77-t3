@@ -1,8 +1,61 @@
 package com.tenjava.entries.mncat77.t3.biome;
 
+import com.tenjava.entries.mncat77.t3.generator.BiomeDecorator;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
+import net.minecraft.server.v1_7_R3.BiomeMeta;
+import net.minecraft.server.v1_7_R3.BiomeTemperature;
+import net.minecraft.server.v1_7_R3.Block;
+import net.minecraft.server.v1_7_R3.BlockFlowers;
+import net.minecraft.server.v1_7_R3.Blocks;
+import net.minecraft.server.v1_7_R3.EntityBat;
+import net.minecraft.server.v1_7_R3.EntityChicken;
+import net.minecraft.server.v1_7_R3.EntityCow;
+import net.minecraft.server.v1_7_R3.EntityCreeper;
+import net.minecraft.server.v1_7_R3.EntityEnderman;
+import net.minecraft.server.v1_7_R3.EntityPig;
+import net.minecraft.server.v1_7_R3.EntitySheep;
+import net.minecraft.server.v1_7_R3.EntitySkeleton;
+import net.minecraft.server.v1_7_R3.EntitySlime;
+import net.minecraft.server.v1_7_R3.EntitySpider;
+import net.minecraft.server.v1_7_R3.EntitySquid;
+import net.minecraft.server.v1_7_R3.EntityWitch;
+import net.minecraft.server.v1_7_R3.EntityZombie;
+import net.minecraft.server.v1_7_R3.EnumCreatureType;
+import net.minecraft.server.v1_7_R3.EnumTemperature;
+import net.minecraft.server.v1_7_R3.Material;
+import net.minecraft.server.v1_7_R3.NoiseGenerator3;
+import net.minecraft.server.v1_7_R3.World;
+import net.minecraft.server.v1_7_R3.WorldGenBigTree;
+import net.minecraft.server.v1_7_R3.WorldGenGrass;
+import net.minecraft.server.v1_7_R3.WorldGenSwampTree;
+import net.minecraft.server.v1_7_R3.WorldGenTallPlant;
+import net.minecraft.server.v1_7_R3.WorldGenTreeAbstract;
+import net.minecraft.server.v1_7_R3.WorldGenTrees;
+import net.minecraft.server.v1_7_R3.WorldGenerator;
+import net.minecraft.util.com.google.common.collect.Sets;
+import org.bukkit.block.Biome;
+
 public abstract class BiomeBase {
 
     //All the biomes as constants
+    protected static final BiomeTemperature a = new BiomeTemperature(0.1F, 0.2F);
+    protected static final BiomeTemperature b = new BiomeTemperature(-0.5F, 0.0F);
+    protected static final BiomeTemperature c = new BiomeTemperature(-1.0F, 0.1F);
+    protected static final BiomeTemperature d = new BiomeTemperature(-1.8F, 0.1F);
+    protected static final BiomeTemperature e = new BiomeTemperature(0.125F, 0.05F);
+    protected static final BiomeTemperature f = new BiomeTemperature(0.2F, 0.2F);
+    protected static final BiomeTemperature g = new BiomeTemperature(0.45F, 0.3F);
+    protected static final BiomeTemperature h = new BiomeTemperature(1.5F, 0.025F);
+    protected static final BiomeTemperature i = new BiomeTemperature(1.0F, 0.5F);
+    protected static final BiomeTemperature j = new BiomeTemperature(0.0F, 0.025F);
+    protected static final BiomeTemperature k = new BiomeTemperature(0.1F, 0.8F);
+    protected static final BiomeTemperature l = new BiomeTemperature(0.2F, 0.3F);
+    protected static final BiomeTemperature m = new BiomeTemperature(-0.2F, 0.1F);
+    private static final BiomeBase[] biomes = new BiomeBase[256];
+    public static final Set n = Sets.newHashSet();
     public static final BiomeBase OCEAN = (new BiomeOcean(0)).b(112).a("Ocean").a(c);
     public static final BiomeBase PLAINS = (new BiomePlains(1)).b(9286496).a("Plains");
     public static final BiomeBase DESERT = (new BiomeDesert(2)).b(16421912).a("Desert").b().a(2.0F, 0.0F).a(e);
@@ -43,6 +96,72 @@ public abstract class BiomeBase {
     public static final BiomeBase MESA = (new BiomeMesa(37, false, false)).b(14238997).a("Mesa");
     public static final BiomeBase MESA_PLATEAU_F = (new BiomeMesa(38, false, true)).b(11573093).a("Mesa Plateau F").a(h);
     public static final BiomeBase MESA_PLATEAU = (new BiomeMesa(39, false, false)).b(13274213).a("Mesa Plateau").a(h);
+    protected static final NoiseGenerator3 ac;
+    protected static final NoiseGenerator3 ad;
+    protected static final WorldGenTallPlant ae;
+    public String af;
+    public int ag;
+    public int ah;
+    public Block ai;
+    public int aj;
+    public Block ak;
+    public int al;
+    public float am;
+    public float an;
+    public float temperature;
+    public float humidity;
+    public int aq;
+    public BiomeDecorator ar;
+    protected List as;
+    protected List at;
+    protected List au;
+    protected List av;
+    protected boolean aw;
+    protected boolean ax;
+    public final int id;
+    protected WorldGenTrees az;
+    protected WorldGenBigTree aA;
+    protected WorldGenSwampTree aB;
+
+    protected BiomeBase(int i) {
+        this.ai = Blocks.GRASS;
+        this.aj = 0;
+        this.ak = Blocks.DIRT;
+        this.al = 5169201;
+        this.am = a.a;
+        this.an = a.b;
+        this.temperature = 0.5F;
+        this.humidity = 0.5F;
+        this.aq = 16777215;
+        this.as = new ArrayList();
+        this.at = new ArrayList();
+        this.au = new ArrayList();
+        this.av = new ArrayList();
+        this.ax = true;
+        this.az = new WorldGenTrees(false);
+        this.aA = new WorldGenBigTree(false);
+        this.aB = new WorldGenSwampTree();
+        this.id = i;
+        biomes[i] = this;
+        this.ar = this.a();
+        this.at.add(new BiomeMeta(EntitySheep.class, 12, 4, 4));
+        this.at.add(new BiomeMeta(EntityPig.class, 10, 4, 4));
+        this.at.add(new BiomeMeta(EntityChicken.class, 10, 4, 4));
+        this.at.add(new BiomeMeta(EntityCow.class, 8, 4, 4));
+        this.as.add(new BiomeMeta(EntitySpider.class, 100, 4, 4));
+        this.as.add(new BiomeMeta(EntityZombie.class, 100, 4, 4));
+        this.as.add(new BiomeMeta(EntitySkeleton.class, 100, 4, 4));
+        this.as.add(new BiomeMeta(EntityCreeper.class, 100, 4, 4));
+        this.as.add(new BiomeMeta(EntitySlime.class, 100, 4, 4));
+        this.as.add(new BiomeMeta(EntityEnderman.class, 10, 1, 4));
+        this.as.add(new BiomeMeta(EntityWitch.class, 5, 1, 1));
+        this.au.add(new BiomeMeta(EntitySquid.class, 10, 4, 4));
+        this.av.add(new BiomeMeta(EntityBat.class, 10, 8, 8));
+    }
+
+    protected BiomeDecorator a() {
+        return new BiomeDecorator();
+    }
 
     protected BiomeBase a(float f, float f1) {
         if(f > 0.1F && f < 0.2F) {
@@ -263,7 +382,6 @@ public abstract class BiomeBase {
             return biomes[i];
         }
         else {
-            aC.warn("Biome ID is out of bounds: " + i + ", defaulting to 0 (Ocean)");
             return OCEAN;
         }
     }
@@ -310,14 +428,6 @@ public abstract class BiomeBase {
         ae = new WorldGenTallPlant();
     }
 
-    public static Object getBiome(int id) {
-        return byId[id];
-    }
-
-    /*An internal id for the biome
-     */
-    public final int id;
-
     /*The id of the material the top block will have, e.g. for plains grass.
      */
     public int topBlockId = 2;
@@ -332,10 +442,6 @@ public abstract class BiomeBase {
     /*All the BiomeBases accessible with their id as array index
      */
     public static final BiomeBase[] byId = new BiomeBase[]{/*OCEAN*/};
-
-    public BiomeBase(int id) {
-        this.id = id;
-    }
 
     public boolean equals(BiomeBase other) {
         return other == this ? true : (other == null ? false : this.getClass() == other.getClass());
