@@ -1,5 +1,7 @@
 package com.tenjava.entries.mncat77.t3.layer;
 
+import net.minecraft.server.v1_7_R3.EnumGenLayerSpecial;
+
 public abstract class BiomeLayer {
 
     protected BiomeLayer parent;
@@ -25,6 +27,15 @@ public abstract class BiomeLayer {
         BiomeLayer layerIcePlains = new BiomeLayerIcePlains(seed + 4, layerIslands);
         BiomeLayer layerTopSoil = new BiomeLayerTopSoil(seed - 4, layerIcePlains);
         layerIslands = new BiomeLayerAddToIslands(seed + 5, layerTopSoil);
+
+        BiomeLayer layerSpecial = new BiomeLayerSpecial(seed - 5, layerIslands, EnumGenLayerSpecial.COOL_WARM);
+
+        layerSpecial = new BiomeLayerSpecial(seed + 6, layerSpecial, EnumGenLayerSpecial.HEAT_ICE);
+        layerSpecial = new BiomeLayerSpecial(seed - 6, layerSpecial, EnumGenLayerSpecial.PUFFERFISH);
+        layerZoom = new BiomeLayerZoom(seed + 7, layerSpecial);
+        layerZoom = new BiomeLayerZoom(seed - 7, layerZoom);
+        layerIslands = new BiomeLayerAddToIslands(seed + 8, layerZoom);
+        //No mushroom islands, cause who will find 'em anyways, don't wanna change rarity either ; prolly waste of time?
 
         return new BiomeLayer[]{null};
     }
