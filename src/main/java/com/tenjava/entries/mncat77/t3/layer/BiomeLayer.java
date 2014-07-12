@@ -57,20 +57,16 @@ public abstract class BiomeLayer {
         BiomeLayer layerRiver = new BiomeLayerRiver(seed + 14, layer1);
         BiomeLayerSmooth layerSmooth = new BiomeLayerSmooth(seed - 14, layerRiver);
 
-        layer3 = new GenLayerPlains(1001L, genlayerregionhills);
+        layer3 = new BiomeLayerPlains(seed + 15, layerRegionHills);
 
-        for(int j = 0; j < b0; ++j) {
-            layer3 = new GenLayerZoom((long)(1000 + j), (GenLayer)layer3);
-            if(j == 0) {
-                layer3 = new GenLayerIsland(3L, (GenLayer)layer3);
-            }
-
-            if(j == 1) {
-                layer3 = new GenLayerMushroomShore(1000L, (GenLayer)layer3);
+        for(int i = 0; i < biomeSize; ++i) {
+            layer3 = new BiomeLayerZoom((long)(seed + i), layer3);
+            if(i == 0) {
+                layer3 = new BiomeLayerAddToIslands(3L, layer3);
             }
         }
 
-        GenLayerSmooth genlayersmooth1 = new GenLayerSmooth(1000L, (GenLayer)layer3);
+        BiomeLayerSmooth layerSmooth1 = new BiomeLayerSmooth(seed - 15, layer3);
         GenLayerRiverMix genlayerrivermix = new GenLayerRiverMix(100L, genlayersmooth1, genlayersmooth);
         GenLayerZoomVoronoi genlayerzoomvoronoi = new GenLayerZoomVoronoi(10L, genlayerrivermix);
         return new BiomeLayer[]{null};
