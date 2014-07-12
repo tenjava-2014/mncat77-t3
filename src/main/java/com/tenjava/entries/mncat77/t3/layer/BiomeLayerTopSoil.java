@@ -1,4 +1,4 @@
-package com.tenjava.entries.mncat77.t3.layer.scrap;
+package com.tenjava.entries.mncat77.t3.layer;
 
 public class BiomeLayerTopSoil extends BiomeLayer {
 

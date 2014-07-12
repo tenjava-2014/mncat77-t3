@@ -1,4 +1,4 @@
-package com.tenjava.entries.mncat77.t3.layer.scrap;
+package com.tenjava.entries.mncat77.t3.layer;
 
 import com.tenjava.entries.mncat77.t3.biome.BiomeBase;
 import net.minecraft.server.v1_7_R3.EnumTemperature;

@@ -1,4 +1,4 @@
-package com.tenjava.entries.mncat77.t3.layer.scrap;
+package com.tenjava.entries.mncat77.t3.layer;
 
 //Just a copy so I have access
 import net.minecraft.server.v1_7_R3.EnumGenLayerSpecial;
