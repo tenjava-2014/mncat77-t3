@@ -67,7 +67,7 @@ public abstract class BiomeLayer {
         }
 
         BiomeLayerSmooth layerSmooth1 = new BiomeLayerSmooth(seed - 15, layer3);
-        GenLayerRiverMix genlayerrivermix = new GenLayerRiverMix(100L, genlayersmooth1, genlayersmooth);
+        BiomeLayerRiverMix genlayerrivermix = new BiomeLayerRiverMix(seed + 16, layerSmooth1, layerSmooth);
         GenLayerZoomVoronoi genlayerzoomvoronoi = new GenLayerZoomVoronoi(10L, genlayerrivermix);
         return new BiomeLayer[]{null};
     }
