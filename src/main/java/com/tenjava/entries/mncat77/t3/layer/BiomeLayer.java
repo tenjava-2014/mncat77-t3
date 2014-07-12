@@ -15,6 +15,7 @@ public abstract class BiomeLayer {
      */
     public static BiomeLayer[] initBiomeLayers(long seed) {
         BiomeLayer layer = new BiomeLayerIslands(seed);
+        layer = new BiomeLayerZoomFuzzy(seed, layer);
         return new BiomeLayer[]{layer};
     }
 
