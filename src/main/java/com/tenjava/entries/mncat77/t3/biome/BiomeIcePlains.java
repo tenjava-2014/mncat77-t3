@@ -22,7 +22,7 @@ public class BiomeIcePlains extends BiomeBase {
             this.topBlock = Blocks.SNOW_BLOCK;
         }
 
-        this.at.clear();
+        this.creatures.clear();
     }
 
     @Override

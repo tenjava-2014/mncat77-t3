@@ -115,10 +115,10 @@ public abstract class BiomeBase {
     public float humidity;
     public int aq;
     public BiomeDecorator decorator;
-    protected List as;
-    protected List at;
-    protected List au;
-    protected List av;
+    protected List monsters;
+    protected List creatures;
+    protected List waterCreatures;
+    protected List ambient;
     protected boolean aw;
     protected boolean ax;
     public final int id;
@@ -137,10 +137,10 @@ public abstract class BiomeBase {
         this.temperature = 0.5F;
         this.humidity = 0.5F;
         this.aq = 16777215;
-        this.as = new ArrayList();
-        this.at = new ArrayList();
-        this.au = new ArrayList();
-        this.av = new ArrayList();
+        this.monsters = new ArrayList();
+        this.creatures = new ArrayList();
+        this.waterCreatures = new ArrayList();
+        this.ambient = new ArrayList();
         this.ax = true;
         this.az = new WorldGenTrees(false);
         this.aA = new WorldGenBigTree(false);
@@ -149,22 +149,22 @@ public abstract class BiomeBase {
         byId[id] = this;
         this.decorator = this.createBiomeDecorator();
 
-        //Mobs that can spawn in the biome in 3 categories: Neutral(creature), Hostile(monster) and Ambient
-        this.at.add(new BiomeMeta(EntitySheep.class, 12, 1, 1));
-        this.at.add(new BiomeMeta(EntityPig.class, 10, 1, 1));
-        this.at.add(new BiomeMeta(EntityChicken.class, 10, 1, 1));
-        this.at.add(new BiomeMeta(EntityCow.class, 8, 1, 1));
-        this.as.add(new BiomeMeta(EntitySpider.class, 100, 6, 6));
-        this.as.add(new BiomeMeta(EntityZombie.class, 100, 9, 9));
-        this.as.add(new BiomeMeta(EntitySkeleton.class, 100, 7, 7));
-        this.as.add(new BiomeMeta(EntityCreeper.class, 100, 8, 8));
-        this.as.add(new BiomeMeta(EntitySlime.class, 100, 4, 4));
-        this.as.add(new BiomeMeta(EntityEnderman.class, 80, 3, 7));
-        this.as.add(new BiomeMeta(EntityWitch.class, 60, 4, 6));
-        this.as.add(new BiomeMeta(EntityGiantZombie.class, 13, 1, 1));
-        this.as.add(new BiomeMeta(EntityWither.class, 1, 1, 1));
-        this.au.add(new BiomeMeta(EntitySquid.class, 10, 4, 4));
-        this.av.add(new BiomeMeta(EntityBat.class, 10, 8, 8));
+        //Mobs that can spawn in the biome in 4 categories: Neutral(creature), Hostile(monster), Water Creatures and Ambient
+        this.creatures.add(new BiomeMeta(EntitySheep.class, 12, 1, 1));
+        this.creatures.add(new BiomeMeta(EntityPig.class, 10, 1, 1));
+        this.creatures.add(new BiomeMeta(EntityChicken.class, 10, 1, 1));
+        this.creatures.add(new BiomeMeta(EntityCow.class, 8, 1, 1));
+        this.monsters.add(new BiomeMeta(EntitySpider.class, 100, 6, 6));
+        this.monsters.add(new BiomeMeta(EntityZombie.class, 100, 9, 9));
+        this.monsters.add(new BiomeMeta(EntitySkeleton.class, 100, 7, 7));
+        this.monsters.add(new BiomeMeta(EntityCreeper.class, 100, 8, 8));
+        this.monsters.add(new BiomeMeta(EntitySlime.class, 100, 4, 4));
+        this.monsters.add(new BiomeMeta(EntityEnderman.class, 80, 3, 7));
+        this.monsters.add(new BiomeMeta(EntityWitch.class, 60, 4, 6));
+        this.monsters.add(new BiomeMeta(EntityGiantZombie.class, 13, 1, 1));
+        this.monsters.add(new BiomeMeta(EntityWither.class, 1, 1, 1));
+        this.waterCreatures.add(new BiomeMeta(EntitySquid.class, 10, 4, 4));
+        this.ambient.add(new BiomeMeta(EntityBat.class, 10, 8, 8));
     }
 
     protected BiomeDecorator createBiomeDecorator() {
@@ -243,7 +243,7 @@ public abstract class BiomeBase {
     }
 
     public List getMobs(EnumCreatureType enumcreaturetype) {
-        return enumcreaturetype == EnumCreatureType.MONSTER ? this.as : (enumcreaturetype == EnumCreatureType.CREATURE ? this.at : (enumcreaturetype == EnumCreatureType.WATER_CREATURE ? this.au : (enumcreaturetype == EnumCreatureType.AMBIENT ? this.av : null)));
+        return enumcreaturetype == EnumCreatureType.MONSTER ? this.monsters : (enumcreaturetype == EnumCreatureType.CREATURE ? this.creatures : (enumcreaturetype == EnumCreatureType.WATER_CREATURE ? this.waterCreatures : (enumcreaturetype == EnumCreatureType.AMBIENT ? this.ambient : null)));
     }
 
     public boolean d() {

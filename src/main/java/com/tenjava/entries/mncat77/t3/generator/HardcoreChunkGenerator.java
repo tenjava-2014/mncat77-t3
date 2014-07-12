@@ -32,7 +32,6 @@ import net.minecraft.server.v1_7_R3.WorldGenLargeFeature;
 import net.minecraft.server.v1_7_R3.WorldGenMineshaft;
 import net.minecraft.server.v1_7_R3.WorldGenStronghold;
 import net.minecraft.server.v1_7_R3.WorldGenVillage;
-import net.minecraft.server.v1_7_R3.WorldType;
 import org.bukkit.craftbukkit.v1_7_R3.generator.InternalChunkGenerator;
 
 public class HardcoreChunkGenerator extends InternalChunkGenerator {
@@ -128,7 +127,6 @@ public class HardcoreChunkGenerator extends InternalChunkGenerator {
     private final NoiseGenerator3 noiseGen_4;
     private final Random rand;
     private final World world;
-    private final WorldType worldType;
 
     public HardcoreChunkGenerator(World world) {
         this.world = world;
@@ -136,7 +134,6 @@ public class HardcoreChunkGenerator extends InternalChunkGenerator {
         this.layer = layers[1];
         this.layer2 = layers[0];
         this.generateFeatures = true;
-        this.worldType = world.getWorldData().getType();
         this.rand = new Random(this.world.getSeed());
         this.noiseGen161 = new NoiseGeneratorOctaves(this.rand, 16);
         this.noiseGen162 = new NoiseGeneratorOctaves(this.rand, 16);
@@ -223,6 +220,7 @@ public class HardcoreChunkGenerator extends InternalChunkGenerator {
         }
     }
 
+    //Give the blocks their appropriate materials
     public void biomeMaterials(int chunkX, int chunkZ, Block[] ablock, byte[] abyte, int[] biomes) {
         double one16th = 1.0D / 16.0D;
 
@@ -273,6 +271,7 @@ public class HardcoreChunkGenerator extends InternalChunkGenerator {
         this.rand.setSeed((long)chunkX * i1 + (long)chunkZ * j1 ^ this.world.getSeed());
         boolean flag = false;
 
+        //Populate
         if(this.generateFeatures) {
             this.genMineshaft.a(this.world, this.rand, chunkX, chunkZ);
             flag = this.genVillage.a(this.world, this.rand, chunkX, chunkZ);
@@ -333,6 +332,7 @@ public class HardcoreChunkGenerator extends InternalChunkGenerator {
         BlockFalling.instaFall = false;
     }
 
+    //Calculates Densities with the smaller biome layer (1/4th of actual biomes for efficiency)
     private void getDensities(int chunkQuarterX, int chunkQuarterYAkaZero, int chunkQuarterZ) {
         this.noise16o3 = this.noiseGen163.a(this.noise16o3, chunkQuarterX, chunkQuarterZ, 5, 5, 200.0D, 200.0D, 0.5D);
         this.noise8o = this.noiseGen81.a(this.noise8o, chunkQuarterX, chunkQuarterYAkaZero, chunkQuarterZ, 5, 33, 5, 8.555150000000001D, 4.277575000000001D, 8.555150000000001D);

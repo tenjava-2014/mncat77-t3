@@ -29,13 +29,13 @@ public class BiomeJungle extends BiomeBase {
             this.decorator.x = 50;
         }
 
-        this.decorator.z = 25;
-        this.decorator.y = 4;
+        this.decorator.grassC = 25;
+        this.decorator.flowersC = 4;
         if(!flag) {
-            this.as.add(new BiomeMeta(EntityOcelot.class, 2, 1, 1));
+            this.monsters.add(new BiomeMeta(EntityOcelot.class, 2, 1, 1));
         }
 
-        this.at.add(new BiomeMeta(EntityChicken.class, 10, 4, 4));
+        this.creatures.add(new BiomeMeta(EntityChicken.class, 10, 4, 4));
     }
 
     public WorldGenTreeAbstract a(Random random) {

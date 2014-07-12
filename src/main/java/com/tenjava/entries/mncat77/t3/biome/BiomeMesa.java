@@ -25,16 +25,16 @@ public class BiomeMesa extends BiomeBase {
         this.aI = flag1;
         this.b();
         this.setTemperatureHumidity(2.0F, 0.0F);
-        this.at.clear();
+        this.creatures.clear();
         this.topBlock = Blocks.SAND;
         this.aj = 1;
         this.fillerBlock = Blocks.STAINED_HARDENED_CLAY;
         this.decorator.x = -999;
-        this.decorator.A = 20;
-        this.decorator.C = 3;
-        this.decorator.D = 5;
-        this.decorator.y = 0;
-        this.at.clear();
+        this.decorator.bushC = 20;
+        this.decorator.reedC = 3;
+        this.decorator.cactusC = 5;
+        this.decorator.flowersC = 0;
+        this.creatures.clear();
         if(flag1) {
             this.decorator.x = 5;
         }

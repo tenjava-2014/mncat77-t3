@@ -10,8 +10,8 @@ public class BiomeSavannaSub extends BiomeBaseSub {
     public BiomeSavannaSub(int i, BiomeBase biomebase) {
         super(i, biomebase);
         this.decorator.x = 2;
-        this.decorator.y = 2;
-        this.decorator.z = 5;
+        this.decorator.flowersC = 2;
+        this.decorator.grassC = 5;
     }
 
     @Override

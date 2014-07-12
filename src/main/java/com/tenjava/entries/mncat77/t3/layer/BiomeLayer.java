@@ -5,10 +5,24 @@ import net.minecraft.server.v1_7_R3.EnumGenLayerSpecial;
 
 public abstract class BiomeLayer {
 
-    protected BiomeLayer parent;
-
-    protected long baseSeed;
-    private long chunkSeed;
+    /**
+     * Compares 2 Biomes and check whether or not they are equal
+     *
+     * @param biome1Id The first biome id
+     * @param biome2Id The second biome id
+     * @return Whether or not the biomes are equal
+     */
+    protected static boolean biomeEquals(int biome1Id, int biome2Id) {
+        if(biome1Id == biome2Id) {
+            return true;
+        }
+        else if(biome1Id != BiomeBase.MESA_PLATEAU_F.id && biome1Id != BiomeBase.MESA_PLATEAU.id) {
+            return BiomeBase.getBiome(biome1Id) != null && BiomeBase.getBiome(biome2Id) != null ? BiomeBase.getBiome(biome1Id).equals(BiomeBase.getBiome(biome2Id)) : false;
+        }
+        else {
+            return biome2Id == BiomeBase.MESA_PLATEAU_F.id || biome2Id == BiomeBase.MESA_PLATEAU.id;
+        }
+    }
 
     /**
      * Init all the layers to create the final biome providing layers
@@ -72,21 +86,24 @@ public abstract class BiomeLayer {
         return new BiomeLayer[]{layerZoomVoronoi, layerRiverMix};
     }
 
-    protected static boolean biomeEquals(int biome1Id, int biome2Id) {
-        if(biome1Id == biome2Id) {
-            return true;
-        }
-        else if(biome1Id != BiomeBase.MESA_PLATEAU_F.id && biome1Id != BiomeBase.MESA_PLATEAU.id) {
-            return BiomeBase.getBiome(biome1Id) != null && BiomeBase.getBiome(biome2Id) != null ? BiomeBase.getBiome(biome1Id).equals(BiomeBase.getBiome(biome2Id)) : false;
-        }
-        else {
-            return biome2Id == BiomeBase.MESA_PLATEAU_F.id || biome2Id == BiomeBase.MESA_PLATEAU.id;
-        }
+    /**
+     * Checks if the biome is ocean
+     *
+     * @param id The id of the biome
+     * @return Whether or not the biome is ocean
+     */
+    protected static boolean isBiomeOcean(int id) {
+        return id == BiomeBase.OCEAN.id || id == BiomeBase.DEEP_OCEAN.id || id == BiomeBase.FROZEN_OCEAN.id;
     }
 
-    protected static boolean isBiomeOcean(int i) {
-        return i == BiomeBase.OCEAN.id || i == BiomeBase.DEEP_OCEAN.id || i == BiomeBase.FROZEN_OCEAN.id;
-    }
+    //The base seed
+    protected long baseSeed;
+
+    //A seed initialized for each area (size differs, usually one tile in layer)
+    private long chunkSeed;
+
+    //An optional parent Biome Layer (only the first one doesn't have a parent)
+    protected BiomeLayer parent;
 
     /**
      * Create a fresh BiomeLayer(only used by first layer)
@@ -106,6 +123,20 @@ public abstract class BiomeLayer {
     protected BiomeLayer(long seed, BiomeLayer parent) {
         this.baseSeed = seed;
         this.parent = parent;
+    }
+
+    /**
+     * Randomly choose one element from an array
+     *
+     * @param choices The choices as array
+     * @return A random element of the array
+     */
+    protected int choose(int... choices) {
+        return choices[this.nextInt(choices.length)];
+    }
+
+    protected int chooseZoom(int choice1, int choice2, int choice3, int choice4) {
+        return choice2 == choice3 && choice3 == choice4 ? choice2 : (choice1 == choice2 && choice1 == choice3 ? choice1 : (choice1 == choice2 && choice1 == choice4 ? choice1 : (choice1 == choice3 && choice1 == choice4 ? choice1 : (choice1 == choice2 && choice3 != choice4 ? choice1 : (choice1 == choice3 && choice2 != choice4 ? choice1 : (choice1 == choice4 && choice2 != choice3 ? choice1 : (choice2 == choice3 && choice1 != choice4 ? choice2 : (choice2 == choice4 && choice1 != choice3 ? choice2 : (choice3 == choice4 && choice1 != choice2 ? choice3 : this.choose(new int[]{choice1, choice2, choice3, choice4}))))))))));
     }
 
     /**
@@ -154,14 +185,6 @@ public abstract class BiomeLayer {
         this.chunkSeed *= this.chunkSeed * 6364136223846793005L + 1442695040888963407L;
         this.chunkSeed += this.baseSeed;
         return rand;
-    }
-
-    protected int choose(int... choices) {
-        return choices[this.nextInt(choices.length)];
-    }
-
-    protected int chooseZoom(int choice1, int choice2, int choice3, int choice4) {
-        return choice2 == choice3 && choice3 == choice4 ? choice2 : (choice1 == choice2 && choice1 == choice3 ? choice1 : (choice1 == choice2 && choice1 == choice4 ? choice1 : (choice1 == choice3 && choice1 == choice4 ? choice1 : (choice1 == choice2 && choice3 != choice4 ? choice1 : (choice1 == choice3 && choice2 != choice4 ? choice1 : (choice1 == choice4 && choice2 != choice3 ? choice1 : (choice2 == choice3 && choice1 != choice4 ? choice2 : (choice2 == choice4 && choice1 != choice3 ? choice2 : (choice3 == choice4 && choice1 != choice2 ? choice3 : this.choose(new int[]{choice1, choice2, choice3, choice4}))))))))));
     }
 
 }

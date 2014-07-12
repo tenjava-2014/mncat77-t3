@@ -13,10 +13,10 @@ public class BiomeSavanna extends BiomeBase {
 
     protected BiomeSavanna(int i) {
         super(i);
-        this.at.add(new BiomeMeta(EntityHorse.class, 1, 2, 6));
+        this.creatures.add(new BiomeMeta(EntityHorse.class, 1, 2, 6));
         this.decorator.x = 1;
-        this.decorator.y = 4;
-        this.decorator.z = 20;
+        this.decorator.flowersC = 4;
+        this.decorator.grassC = 20;
     }
 
     public WorldGenTreeAbstract a(Random random) {

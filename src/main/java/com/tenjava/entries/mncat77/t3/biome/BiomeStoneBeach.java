@@ -6,12 +6,12 @@ public class BiomeStoneBeach extends BiomeBase {
 
     public BiomeStoneBeach(int i) {
         super(i);
-        this.at.clear();
+        this.creatures.clear();
         this.topBlock = Blocks.STONE;
         this.fillerBlock = Blocks.STONE;
         this.decorator.x = -999;
-        this.decorator.A = 0;
-        this.decorator.C = 0;
-        this.decorator.D = 0;
+        this.decorator.bushC = 0;
+        this.decorator.reedC = 0;
+        this.decorator.cactusC = 0;
     }
 }

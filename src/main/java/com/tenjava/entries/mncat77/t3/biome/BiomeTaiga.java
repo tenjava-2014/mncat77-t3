@@ -27,16 +27,16 @@ public class BiomeTaiga extends BiomeBase {
     public BiomeTaiga(int i, int j) {
         super(i);
         this.aH = j;
-        this.at.add(new BiomeMeta(EntityWolf.class, 8, 4, 4));
+        this.creatures.add(new BiomeMeta(EntityWolf.class, 8, 4, 4));
         this.decorator.x = 10;
         if(j != 1 && j != 2) {
-            this.decorator.z = 1;
-            this.decorator.B = 1;
+            this.decorator.grassC = 1;
+            this.decorator.brownmushroomC = 1;
         }
         else {
-            this.decorator.z = 7;
-            this.decorator.A = 1;
-            this.decorator.B = 3;
+            this.decorator.grassC = 7;
+            this.decorator.bushC = 1;
+            this.decorator.brownmushroomC = 3;
         }
     }
 

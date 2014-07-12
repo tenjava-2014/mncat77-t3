@@ -6,7 +6,7 @@ public class BiomeOcean extends BiomeBase {
 
     public BiomeOcean(int id) {
         super(id);
-        this.at.clear();
+        this.creatures.clear();
     }
 
     @Override

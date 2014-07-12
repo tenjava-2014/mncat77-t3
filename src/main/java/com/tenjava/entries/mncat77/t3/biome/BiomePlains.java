@@ -14,10 +14,10 @@ public class BiomePlains extends BiomeBase {
         super(i);
         this.setTemperatureHumidity(0.8F, 0.4F);
         this.setTemperatureHumidity(e);
-        this.at.add(new BiomeMeta(EntityHorse.class, 5, 2, 6));
+        this.creatures.add(new BiomeMeta(EntityHorse.class, 5, 2, 6));
         this.decorator.x = -999;
-        this.decorator.y = 4;
-        this.decorator.z = 10;
+        this.decorator.flowersC = 4;
+        this.decorator.grassC = 10;
     }
 
     public String a(Random random, int i, int j, int k) {
@@ -46,12 +46,12 @@ public class BiomePlains extends BiomeBase {
         int j1;
 
         if(d0 < -0.8D) {
-            this.decorator.y = 15;
-            this.decorator.z = 5;
+            this.decorator.flowersC = 15;
+            this.decorator.grassC = 5;
         }
         else {
-            this.decorator.y = 4;
-            this.decorator.z = 10;
+            this.decorator.flowersC = 4;
+            this.decorator.grassC = 10;
             ae.a(2);
 
             for(k = 0; k < 7; ++k) {

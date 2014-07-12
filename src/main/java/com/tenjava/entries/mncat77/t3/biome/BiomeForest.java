@@ -23,11 +23,11 @@ public class BiomeForest extends BiomeBase {
         super(i);
         this.aF = j;
         this.decorator.x = 10;
-        this.decorator.z = 2;
+        this.decorator.grassC = 2;
         if(this.aF == 1) {
             this.decorator.x = 6;
-            this.decorator.y = 100;
-            this.decorator.z = 1;
+            this.decorator.flowersC = 100;
+            this.decorator.grassC = 1;
         }
 
         this.a(5159473);
@@ -39,7 +39,7 @@ public class BiomeForest extends BiomeBase {
         }
 
         if(this.aF == 0) {
-            this.at.add(new BiomeMeta(EntityWolf.class, 5, 4, 4));
+            this.creatures.add(new BiomeMeta(EntityWolf.class, 5, 4, 4));
         }
 
         if(this.aF == 3) {

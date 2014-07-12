@@ -15,17 +15,17 @@ public class BiomeSwamp extends BiomeBase {
     protected BiomeSwamp(int i) {
         super(i);
         this.decorator.x = 2;
-        this.decorator.y = 1;
-        this.decorator.A = 1;
-        this.decorator.B = 8;
-        this.decorator.C = 10;
-        this.decorator.G = 1;
-        this.decorator.w = 4;
-        this.decorator.F = 0;
-        this.decorator.E = 0;
-        this.decorator.z = 5;
+        this.decorator.flowersC = 1;
+        this.decorator.bushC = 1;
+        this.decorator.brownmushroomC = 8;
+        this.decorator.reedC = 10;
+        this.decorator.clayC = 1;
+        this.decorator.lilyC = 4;
+        this.decorator.sandC = 0;
+        this.decorator.gravelC = 0;
+        this.decorator.grassC = 5;
         this.aq = 14745518;
-        this.as.add(new BiomeMeta(EntitySlime.class, 1, 1, 1));
+        this.monsters.add(new BiomeMeta(EntitySlime.class, 1, 1, 1));
     }
 
     public WorldGenTreeAbstract a(Random random) {

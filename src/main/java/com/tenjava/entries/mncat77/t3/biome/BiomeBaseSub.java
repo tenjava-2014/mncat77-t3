@@ -26,10 +26,10 @@ public class BiomeBaseSub extends BiomeBase {
         this.aq = biomebase.aq;
         this.aw = biomebase.aw;
         this.ax = biomebase.ax;
-        this.at = new ArrayList(biomebase.at);
-        this.as = new ArrayList(biomebase.as);
-        this.av = new ArrayList(biomebase.av);
-        this.au = new ArrayList(biomebase.au);
+        this.creatures = new ArrayList(biomebase.creatures);
+        this.monsters = new ArrayList(biomebase.monsters);
+        this.ambient = new ArrayList(biomebase.ambient);
+        this.waterCreatures = new ArrayList(biomebase.waterCreatures);
         this.temperature = biomebase.temperature;
         this.humidity = biomebase.humidity;
         this.am = biomebase.am + 0.1F;

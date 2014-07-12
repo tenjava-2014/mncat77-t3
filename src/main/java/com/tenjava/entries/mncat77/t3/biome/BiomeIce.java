@@ -16,7 +16,7 @@ public class BiomeIce extends BiomeBase {
     public BiomeIce(int id) {
         super(id);
         this.topBlock = Blocks.SNOW_BLOCK;
-        this.at.clear();
+        this.creatures.clear();
     }
 
     @Override
