@@ -9,22 +9,22 @@ public class BiomeSavannaSub extends BiomeBaseSub {
 
     public BiomeSavannaSub(int i, BiomeBase biomebase) {
         super(i, biomebase);
-        this.ar.x = 2;
-        this.ar.y = 2;
-        this.ar.z = 5;
+        this.decorator.x = 2;
+        this.decorator.y = 2;
+        this.decorator.z = 5;
     }
 
     @Override
     public void a(World world, Random random, Block[] ablock, byte[] abyte, int i, int j, double d0) {
-        this.ai = Blocks.GRASS;
+        this.topBlock = Blocks.GRASS;
         this.aj = 0;
-        this.ak = Blocks.DIRT;
+        this.fillerBlock = Blocks.DIRT;
         if(d0 > 1.75D) {
-            this.ai = Blocks.STONE;
-            this.ak = Blocks.STONE;
+            this.topBlock = Blocks.STONE;
+            this.fillerBlock = Blocks.STONE;
         }
         else if(d0 > -0.5D) {
-            this.ai = Blocks.DIRT;
+            this.topBlock = Blocks.DIRT;
             this.aj = 1;
         }
 
@@ -33,6 +33,6 @@ public class BiomeSavannaSub extends BiomeBaseSub {
 
     @Override
     public void a(World world, Random random, int i, int j) {
-        this.ar.a(world, random, this, i, j);
+        this.decorator.a(world, random, this, i, j);
     }
 }

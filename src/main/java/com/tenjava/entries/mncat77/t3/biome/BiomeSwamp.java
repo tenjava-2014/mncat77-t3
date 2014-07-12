@@ -14,16 +14,16 @@ public class BiomeSwamp extends BiomeBase {
 
     protected BiomeSwamp(int i) {
         super(i);
-        this.ar.x = 2;
-        this.ar.y = 1;
-        this.ar.A = 1;
-        this.ar.B = 8;
-        this.ar.C = 10;
-        this.ar.G = 1;
-        this.ar.w = 4;
-        this.ar.F = 0;
-        this.ar.E = 0;
-        this.ar.z = 5;
+        this.decorator.x = 2;
+        this.decorator.y = 1;
+        this.decorator.A = 1;
+        this.decorator.B = 8;
+        this.decorator.C = 10;
+        this.decorator.G = 1;
+        this.decorator.w = 4;
+        this.decorator.F = 0;
+        this.decorator.E = 0;
+        this.decorator.z = 5;
         this.aq = 14745518;
         this.as.add(new BiomeMeta(EntitySlime.class, 1, 1, 1));
     }

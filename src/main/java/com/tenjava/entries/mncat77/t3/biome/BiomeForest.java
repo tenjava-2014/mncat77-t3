@@ -22,12 +22,12 @@ public class BiomeForest extends BiomeBase {
     public BiomeForest(int i, int j) {
         super(i);
         this.aF = j;
-        this.ar.x = 10;
-        this.ar.z = 2;
+        this.decorator.x = 10;
+        this.decorator.z = 2;
         if(this.aF == 1) {
-            this.ar.x = 6;
-            this.ar.y = 100;
-            this.ar.z = 1;
+            this.decorator.x = 6;
+            this.decorator.y = 100;
+            this.decorator.z = 1;
         }
 
         this.a(5159473);
@@ -43,7 +43,7 @@ public class BiomeForest extends BiomeBase {
         }
 
         if(this.aF == 3) {
-            this.ar.x = -999;
+            this.decorator.x = -999;
         }
     }
 

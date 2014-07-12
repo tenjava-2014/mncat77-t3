@@ -23,14 +23,14 @@ public class BiomeJungle extends BiomeBase {
         super(i);
         this.aC = flag;
         if(flag) {
-            this.ar.x = 2;
+            this.decorator.x = 2;
         }
         else {
-            this.ar.x = 50;
+            this.decorator.x = 50;
         }
 
-        this.ar.z = 25;
-        this.ar.y = 4;
+        this.decorator.z = 25;
+        this.decorator.y = 4;
         if(!flag) {
             this.as.add(new BiomeMeta(EntityOcelot.class, 2, 1, 1));
         }

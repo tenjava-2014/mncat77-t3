@@ -28,7 +28,7 @@ public class BiomeBigHills extends BiomeBase {
         this.aG = 2;
         this.aH = this.aE;
         if(flag) {
-            this.ar.x = 3;
+            this.decorator.x = 3;
             this.aH = this.aF;
         }
     }
@@ -65,16 +65,16 @@ public class BiomeBigHills extends BiomeBase {
     }
 
     public void a(World world, Random random, Block[] ablock, byte[] abyte, int i, int j, double d0) {
-        this.ai = Blocks.GRASS;
+        this.topBlock = Blocks.GRASS;
         this.aj = 0;
-        this.ak = Blocks.DIRT;
+        this.fillerBlock = Blocks.DIRT;
         if((d0 < -1.0D || d0 > 2.0D) && this.aH == this.aG) {
-            this.ai = Blocks.GRAVEL;
-            this.ak = Blocks.GRAVEL;
+            this.topBlock = Blocks.GRAVEL;
+            this.fillerBlock = Blocks.GRAVEL;
         }
         else if(d0 > 1.0D && this.aH != this.aF) {
-            this.ai = Blocks.STONE;
-            this.ak = Blocks.STONE;
+            this.topBlock = Blocks.STONE;
+            this.fillerBlock = Blocks.STONE;
         }
 
         this.b(world, random, ablock, abyte, i, j, d0);

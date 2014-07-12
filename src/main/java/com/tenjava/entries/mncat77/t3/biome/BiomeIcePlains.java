@@ -19,7 +19,7 @@ public class BiomeIcePlains extends BiomeBase {
         super(i);
         this.aC = flag;
         if(flag) {
-            this.ai = Blocks.SNOW_BLOCK;
+            this.topBlock = Blocks.SNOW_BLOCK;
         }
 
         this.at.clear();

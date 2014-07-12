@@ -28,15 +28,15 @@ public class BiomeTaiga extends BiomeBase {
         super(i);
         this.aH = j;
         this.at.add(new BiomeMeta(EntityWolf.class, 8, 4, 4));
-        this.ar.x = 10;
+        this.decorator.x = 10;
         if(j != 1 && j != 2) {
-            this.ar.z = 1;
-            this.ar.B = 1;
+            this.decorator.z = 1;
+            this.decorator.B = 1;
         }
         else {
-            this.ar.z = 7;
-            this.ar.A = 1;
-            this.ar.B = 3;
+            this.decorator.z = 7;
+            this.decorator.A = 1;
+            this.decorator.B = 3;
         }
     }
 
@@ -82,15 +82,15 @@ public class BiomeTaiga extends BiomeBase {
     @Override
     public void a(World world, Random random, Block[] ablock, byte[] abyte, int i, int j, double d0) {
         if(this.aH == 1 || this.aH == 2) {
-            this.ai = Blocks.GRASS;
+            this.topBlock = Blocks.GRASS;
             this.aj = 0;
-            this.ak = Blocks.DIRT;
+            this.fillerBlock = Blocks.DIRT;
             if(d0 > 1.75D) {
-                this.ai = Blocks.DIRT;
+                this.topBlock = Blocks.DIRT;
                 this.aj = 1;
             }
             else if(d0 > -0.95D) {
-                this.ai = Blocks.DIRT;
+                this.topBlock = Blocks.DIRT;
                 this.aj = 2;
             }
         }

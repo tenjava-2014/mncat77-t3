@@ -10,12 +10,12 @@ public class BiomeDesert extends BiomeBase {
     public BiomeDesert(int id) {
         super(id);
         this.at.clear();
-        this.ai = Blocks.SAND;
-        this.ak = Blocks.SAND;
-        this.ar.x = -999;
-        this.ar.A = 2;
-        this.ar.C = 50;
-        this.ar.D = 10;
+        this.topBlock = Blocks.SAND;
+        this.fillerBlock = Blocks.SAND;
+        this.decorator.x = -999;
+        this.decorator.A = 2;
+        this.decorator.C = 50;
+        this.decorator.D = 10;
         this.at.clear();
     }
 

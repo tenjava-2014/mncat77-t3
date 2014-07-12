@@ -14,9 +14,9 @@ public class BiomeSavanna extends BiomeBase {
     protected BiomeSavanna(int i) {
         super(i);
         this.at.add(new BiomeMeta(EntityHorse.class, 1, 2, 6));
-        this.ar.x = 1;
-        this.ar.y = 4;
-        this.ar.z = 20;
+        this.decorator.x = 1;
+        this.decorator.y = 4;
+        this.decorator.z = 20;
     }
 
     public WorldGenTreeAbstract a(Random random) {

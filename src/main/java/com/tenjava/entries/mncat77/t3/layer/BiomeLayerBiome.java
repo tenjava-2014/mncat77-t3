@@ -32,9 +32,6 @@ public class BiomeLayerBiome extends BiomeLayer {
                 if(this.isBiomeOcean(parentValue)) {
                     values[x + z * width] = parentValue;
                 }
-                else if(parentValue == BiomeBase.MUSHROOM_ISLAND.id) {
-                    values[x + z * width] = parentValue;
-                }
                 else if(parentValue == 1) {
                     if(l1 > 0) {
                         if(this.nextInt(3) == 0) {

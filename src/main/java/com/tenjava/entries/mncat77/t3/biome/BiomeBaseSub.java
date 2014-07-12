@@ -16,8 +16,8 @@ public class BiomeBaseSub extends BiomeBase {
         this.aD = biomebase;
         this.a(biomebase.ag, true);
         this.af = biomebase.af + " M";
-        this.ai = biomebase.ai;
-        this.ak = biomebase.ak;
+        this.topBlock = biomebase.topBlock;
+        this.fillerBlock = biomebase.fillerBlock;
         this.al = biomebase.al;
         this.am = biomebase.am;
         this.an = biomebase.an;
@@ -38,7 +38,7 @@ public class BiomeBaseSub extends BiomeBase {
 
     @Override
     public void a(World world, Random random, int i, int j) {
-        this.aD.ar.a(world, random, this, i, j);
+        this.aD.decorator.a(world, random, this, i, j);
     }
 
     public void a(World world, Random random, Block[] ablock, byte[] abyte, int i, int j, double d0) {

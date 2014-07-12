@@ -36,7 +36,6 @@ import net.minecraft.server.v1_7_R3.WorldGenTreeAbstract;
 import net.minecraft.server.v1_7_R3.WorldGenTrees;
 import net.minecraft.server.v1_7_R3.WorldGenerator;
 import net.minecraft.util.com.google.common.collect.Sets;
-import org.bukkit.block.Biome;
 
 public abstract class BiomeBase {
 
@@ -103,19 +102,16 @@ public abstract class BiomeBase {
     public String af;
     public int ag;
     public int ah;
-    //topb
-    public Block ai;
+    public Block topBlock;
     public int aj;
-    //fillb
-    public Block ak;
+    public Block fillerBlock;
     public int al;
     public float am;
     public float an;
     public float temperature;
     public float humidity;
     public int aq;
-    //dec
-    public BiomeDecorator ar;
+    public BiomeDecorator decorator;
     protected List as;
     protected List at;
     protected List au;
@@ -128,9 +124,9 @@ public abstract class BiomeBase {
     protected WorldGenSwampTree aB;
 
     protected BiomeBase(int id) {
-        this.ai = Blocks.GRASS;
+        this.topBlock = Blocks.GRASS;
         this.aj = 0;
-        this.ak = Blocks.DIRT;
+        this.fillerBlock = Blocks.DIRT;
         this.al = 5169201;
         this.am = a.a;
         this.an = a.b;
@@ -147,7 +143,7 @@ public abstract class BiomeBase {
         this.aB = new WorldGenSwampTree();
         this.id = id;
         byId[id] = this;
-        this.ar = this.createBiomeDecorator();
+        this.decorator = this.createBiomeDecorator();
         this.at.add(new BiomeMeta(EntitySheep.class, 12, 4, 4));
         this.at.add(new BiomeMeta(EntityPig.class, 10, 4, 4));
         this.at.add(new BiomeMeta(EntityChicken.class, 10, 4, 4));
@@ -274,7 +270,7 @@ public abstract class BiomeBase {
     }
 
     public void a(World world, Random random, int i, int j) {
-        this.ar.a(world, random, this, i, j);
+        this.decorator.a(world, random, this, i, j);
     }
 
     public boolean j() {
@@ -287,9 +283,9 @@ public abstract class BiomeBase {
 
     public final void b(World world, Random random, Block[] ablock, byte[] abyte, int i, int j, double d0) {
         boolean flag = true;
-        Block block = this.ai;
+        Block block = this.topBlock;
         byte b0 = (byte)(this.aj & 255);
-        Block block1 = this.ak;
+        Block block1 = this.fillerBlock;
         int k = -1;
         int l = (int)(d0 / 3.0D + 3.0D + random.nextDouble() * 0.25D);
         int i1 = i & 15;
@@ -314,9 +310,9 @@ public abstract class BiomeBase {
                                 block1 = Blocks.STONE;
                             }
                             else if(l1 >= 59 && l1 <= 64) {
-                                block = this.ai;
+                                block = this.topBlock;
                                 b0 = (byte)(this.aj & 255);
-                                block1 = this.ak;
+                                block1 = this.fillerBlock;
                             }
 
                             if(l1 < 63 && (block == null || block.getMaterial() == Material.AIR)) {
@@ -437,21 +433,8 @@ public abstract class BiomeBase {
      */
     public int fillerBlockId = 3;
 
-    /*The corresponding Bukkit biome
-     */
-    protected Biome bukkitBiome;
-
     public boolean equals(BiomeBase other) {
         return other == this ? true : (other == null ? false : this.getClass() == other.getClass());
-    }
-
-    /**
-     * Get the corresponding Bukkit biome
-     *
-     * @return The corresponding Bukkit biome
-     */
-    public Biome getBukkitBiome() {
-        return this.bukkitBiome;
     }
 
 }

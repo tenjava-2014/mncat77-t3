@@ -25,11 +25,8 @@ public class BiomeLayerRiverMix extends BiomeLayer {
                     if(parentBiomeValues[index] == BiomeBase.ICE_PLAINS.id) {
                         values[index] = BiomeBase.FROZEN_RIVER.id;
                     }
-                    else if(parentBiomeValues[index] != BiomeBase.MUSHROOM_ISLAND.id && parentBiomeValues[index] != BiomeBase.MUSHROOM_SHORE.id) {
-                        values[index] = parentRiverValues[index] & 255;
-                    }
                     else {
-                        values[index] = BiomeBase.MUSHROOM_SHORE.id;
+                        values[index] = BiomeBase.RIVER.id;
                     }
                 }
                 else {

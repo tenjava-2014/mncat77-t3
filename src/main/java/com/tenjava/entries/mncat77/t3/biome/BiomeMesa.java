@@ -26,17 +26,17 @@ public class BiomeMesa extends BiomeBase {
         this.b();
         this.a(2.0F, 0.0F);
         this.at.clear();
-        this.ai = Blocks.SAND;
+        this.topBlock = Blocks.SAND;
         this.aj = 1;
-        this.ak = Blocks.STAINED_HARDENED_CLAY;
-        this.ar.x = -999;
-        this.ar.A = 20;
-        this.ar.C = 3;
-        this.ar.D = 5;
-        this.ar.y = 0;
+        this.fillerBlock = Blocks.STAINED_HARDENED_CLAY;
+        this.decorator.x = -999;
+        this.decorator.A = 20;
+        this.decorator.C = 3;
+        this.decorator.D = 5;
+        this.decorator.y = 0;
         this.at.clear();
         if(flag1) {
-            this.ar.x = 5;
+            this.decorator.x = 5;
         }
     }
 
@@ -90,7 +90,7 @@ public class BiomeMesa extends BiomeBase {
         l = j & 15;
         boolean flag = true;
         Block block = Blocks.STAINED_HARDENED_CLAY;
-        Block block1 = this.ak;
+        Block block1 = this.fillerBlock;
         int i1 = (int)(d0 / 3.0D + 3.0D + random.nextDouble() * 0.25D);
         boolean flag1 = Math.cos(d0 / 3.0D * 3.141592653589793D) > 0.0D;
         int j1 = -1;
@@ -122,7 +122,7 @@ public class BiomeMesa extends BiomeBase {
                             }
                             else if(l1 >= 59 && l1 <= 64) {
                                 block = Blocks.STAINED_HARDENED_CLAY;
-                                block1 = this.ak;
+                                block1 = this.fillerBlock;
                             }
 
                             if(l1 < 63 && (block == null || block.getMaterial() == Material.AIR)) {
@@ -160,7 +160,7 @@ public class BiomeMesa extends BiomeBase {
                                     }
                                 }
                                 else {
-                                    ablock[i2] = this.ai;
+                                    ablock[i2] = this.topBlock;
                                     abyte[i2] = (byte)this.aj;
                                     flag2 = true;
                                 }
