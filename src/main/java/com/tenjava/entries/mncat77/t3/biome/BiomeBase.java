@@ -1,7 +1,5 @@
 package com.tenjava.entries.mncat77.t3.biome;
 
-import org.bukkit.block.Biome;
-
 public abstract class BiomeBase {
 
     //All the biomes as constants
@@ -45,6 +43,272 @@ public abstract class BiomeBase {
     public static final BiomeBase MESA = (new BiomeMesa(37, false, false)).b(14238997).a("Mesa");
     public static final BiomeBase MESA_PLATEAU_F = (new BiomeMesa(38, false, true)).b(11573093).a("Mesa Plateau F").a(h);
     public static final BiomeBase MESA_PLATEAU = (new BiomeMesa(39, false, false)).b(13274213).a("Mesa Plateau").a(h);
+
+    protected BiomeBase a(float f, float f1) {
+        if(f > 0.1F && f < 0.2F) {
+            throw new IllegalArgumentException("Please avoid temperatures in the range 0.1 - 0.2 because of snow");
+        }
+        else {
+            this.temperature = f;
+            this.humidity = f1;
+            return this;
+        }
+    }
+
+    protected final BiomeBase a(BiomeTemperature biometemperature) {
+        this.am = biometemperature.a;
+        this.an = biometemperature.b;
+        return this;
+    }
+
+    protected BiomeBase b() {
+        this.ax = false;
+        return this;
+    }
+
+    public WorldGenTreeAbstract a(Random random) {
+        return (WorldGenTreeAbstract)(random.nextInt(10) == 0 ? this.aA : this.az);
+    }
+
+    public WorldGenerator b(Random random) {
+        return new WorldGenGrass(Blocks.LONG_GRASS, 1);
+    }
+
+    public String a(Random random, int i, int j, int k) {
+        return random.nextInt(3) > 0 ? BlockFlowers.b[0] : BlockFlowers.a[0];
+    }
+
+    protected BiomeBase c() {
+        this.aw = true;
+        return this;
+    }
+
+    protected BiomeBase a(String s) {
+        this.af = s;
+        return this;
+    }
+
+    protected BiomeBase a(int i) {
+        this.al = i;
+        return this;
+    }
+
+    protected BiomeBase b(int i) {
+        this.a(i, false);
+        return this;
+    }
+
+    protected BiomeBase c(int i) {
+        this.ah = i;
+        return this;
+    }
+
+    protected BiomeBase a(int i, boolean flag) {
+        this.ag = i;
+        if(flag) {
+            this.ah = (i & 16711422) >> 1;
+        }
+        else {
+            this.ah = i;
+        }
+
+        return this;
+    }
+
+    public List getMobs(EnumCreatureType enumcreaturetype) {
+        return enumcreaturetype == EnumCreatureType.MONSTER ? this.as : (enumcreaturetype == EnumCreatureType.CREATURE ? this.at : (enumcreaturetype == EnumCreatureType.WATER_CREATURE ? this.au : (enumcreaturetype == EnumCreatureType.AMBIENT ? this.av : null)));
+    }
+
+    public boolean d() {
+        return this.j();
+    }
+
+    public boolean e() {
+        return this.j() ? false : this.ax;
+    }
+
+    public boolean f() {
+        return this.humidity > 0.85F;
+    }
+
+    public float g() {
+        return 0.1F;
+    }
+
+    public final int h() {
+        return (int)(this.humidity * 65536.0F);
+    }
+
+    public final float a(int i, int j, int k) {
+        if(j > 64) {
+            float f = (float)ac.a((double)i * 1.0D / 8.0D, (double)k * 1.0D / 8.0D) * 4.0F;
+
+            return this.temperature - (f + (float)j - 64.0F) * 0.05F / 30.0F;
+        }
+        else {
+            return this.temperature;
+        }
+    }
+
+    public void a(World world, Random random, int i, int j) {
+        this.ar.a(world, random, this, i, j);
+    }
+
+    public boolean j() {
+        return this.aw;
+    }
+
+    public void a(World world, Random random, Block[] ablock, byte[] abyte, int i, int j, double d0) {
+        this.b(world, random, ablock, abyte, i, j, d0);
+    }
+
+    public final void b(World world, Random random, Block[] ablock, byte[] abyte, int i, int j, double d0) {
+        boolean flag = true;
+        Block block = this.ai;
+        byte b0 = (byte)(this.aj & 255);
+        Block block1 = this.ak;
+        int k = -1;
+        int l = (int)(d0 / 3.0D + 3.0D + random.nextDouble() * 0.25D);
+        int i1 = i & 15;
+        int j1 = j & 15;
+        int k1 = ablock.length / 256;
+
+        for(int l1 = 255; l1 >= 0; --l1) {
+            int i2 = (j1 * 16 + i1) * k1 + l1;
+
+            if(l1 <= 0 + random.nextInt(5)) {
+                ablock[i2] = Blocks.BEDROCK;
+            }
+            else {
+                Block block2 = ablock[i2];
+
+                if(block2 != null && block2.getMaterial() != Material.AIR) {
+                    if(block2 == Blocks.STONE) {
+                        if(k == -1) {
+                            if(l <= 0) {
+                                block = null;
+                                b0 = 0;
+                                block1 = Blocks.STONE;
+                            }
+                            else if(l1 >= 59 && l1 <= 64) {
+                                block = this.ai;
+                                b0 = (byte)(this.aj & 255);
+                                block1 = this.ak;
+                            }
+
+                            if(l1 < 63 && (block == null || block.getMaterial() == Material.AIR)) {
+                                if(this.a(i, l1, j) < 0.15F) {
+                                    block = Blocks.ICE;
+                                    b0 = 0;
+                                }
+                                else {
+                                    block = Blocks.STATIONARY_WATER;
+                                    b0 = 0;
+                                }
+                            }
+
+                            k = l;
+                            if(l1 >= 62) {
+                                ablock[i2] = block;
+                                abyte[i2] = b0;
+                            }
+                            else if(l1 < 56 - l) {
+                                block = null;
+                                block1 = Blocks.STONE;
+                                ablock[i2] = Blocks.GRAVEL;
+                            }
+                            else {
+                                ablock[i2] = block1;
+                            }
+                        }
+                        else if(k > 0) {
+                            --k;
+                            ablock[i2] = block1;
+                            if(k == 0 && block1 == Blocks.SAND) {
+                                k = random.nextInt(4) + Math.max(0, l1 - 63);
+                                block1 = Blocks.SANDSTONE;
+                            }
+                        }
+                    }
+                }
+                else {
+                    k = -1;
+                }
+            }
+        }
+    }
+
+    protected BiomeBase k() {
+        return new BiomeBaseSub(this.id + 128, this);
+    }
+
+    public Class l() {
+        return this.getClass();
+    }
+
+    public boolean a(BiomeBase biomebase) {
+        return biomebase == this ? true : (biomebase == null ? false : this.l() == biomebase.l());
+    }
+
+    public EnumTemperature m() {
+        return (double)this.temperature < 0.2D ? EnumTemperature.COLD : ((double)this.temperature < 1.0D ? EnumTemperature.MEDIUM : EnumTemperature.WARM);
+    }
+
+    public static BiomeBase[] getBiomes() {
+        return biomes;
+    }
+
+    public static BiomeBase getBiome(int i) {
+        if(i >= 0 && i <= biomes.length) {
+            return biomes[i];
+        }
+        else {
+            aC.warn("Biome ID is out of bounds: " + i + ", defaulting to 0 (Ocean)");
+            return OCEAN;
+        }
+    }
+
+    static {
+        PLAINS.k();
+        DESERT.k();
+        FOREST.k();
+        TAIGA.k();
+        SWAMPLAND.k();
+        ICE_PLAINS.k();
+        JUNGLE.k();
+        JUNGLE_EDGE.k();
+        COLD_TAIGA.k();
+        SAVANNA.k();
+        SAVANNA_PLATEAU.k();
+        MESA.k();
+        MESA_PLATEAU_F.k();
+        MESA_PLATEAU.k();
+        BIRCH_FOREST.k();
+        BIRCH_FOREST_HILLS.k();
+        ROOFED_FOREST.k();
+        MEGA_TAIGA.k();
+        EXTREME_HILLS.k();
+        EXTREME_HILLS_PLUS.k();
+        biomes[MEGA_TAIGA_HILLS.id + 128] = biomes[MEGA_TAIGA.id + 128];
+        BiomeBase[] abiomebase = biomes;
+        int i = abiomebase.length;
+
+        for(int j = 0; j < i; ++j) {
+            BiomeBase biomebase = abiomebase[j];
+
+            if(biomebase != null && biomebase.id < 128) {
+                n.add(biomebase);
+            }
+        }
+
+        n.remove(HELL);
+        n.remove(SKY);
+        n.remove(FROZEN_OCEAN);
+        n.remove(SMALL_MOUNTAINS);
+        ac = new NoiseGenerator3(new Random(1234L), 1);
+        ad = new NoiseGenerator3(new Random(2345L), 1);
+        ae = new WorldGenTallPlant();
+    }
 
     public static Object getBiome(int id) {
         return byId[id];
