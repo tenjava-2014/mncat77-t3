@@ -12,9 +12,13 @@ import net.minecraft.server.v1_7_R3.WorldGenerator;
 
 public class WorldGenScatter extends WorldGenerator {
 
+    //Rewards that can be in the Chest
     private static final StructurePieceTreasure[] a = new StructurePieceTreasure[]{new StructurePieceTreasure(Items.PUMPKIN_PIE, 0, 1, 1, 7), new StructurePieceTreasure(Items.DIAMOND, 0, 1, 2, 6), new StructurePieceTreasure(Items.IRON_INGOT, 0, 1, 5, 10), new StructurePieceTreasure(Items.BREAD, 0, 1, 3, 13), new StructurePieceTreasure(Items.GOLDEN_APPLE, 0, 1, 1, 1)};
 
+    //Block type to place
     private final Block b;
+
+    //True for clouds, false for TNT
     private final boolean c;
 
     public WorldGenScatter(Block b, boolean c) {
@@ -29,7 +33,7 @@ public class WorldGenScatter extends WorldGenerator {
             int j1 = j + random.nextInt(4) - random.nextInt(4);
             int k1 = k + random.nextInt(8) - random.nextInt(8);
 
-            if(b.canPlace(world, i1, j1, k1) && (((!c) && (world.getType(i1, j1, k1) == Blocks.GRASS)) || (c && (j1 > world.getHighestBlockYAt(i1, k1))))) {
+            if(b.canPlace(world, i1, j1, k1) && (((!c) && (world.getType(i1, j1 - 1, k1) == Blocks.GRASS)) || (c && (j1 > world.getHighestBlockYAt(i1, k1))))) {
                 world.setTypeAndData(i1, j1, k1, b, 0, 2);
                 if(random.nextInt(32) == 0) {
                     world.setTypeAndData(i1, j1, k1, Blocks.TRAPPED_CHEST, 0, 2);

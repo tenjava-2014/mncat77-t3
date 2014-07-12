@@ -31,11 +31,11 @@ public class BiomeForest extends BiomeBase {
         }
 
         this.a(5159473);
-        this.a(0.7F, 0.8F);
+        this.setTemperatureHumidity(0.7F, 0.8F);
         if(this.aF == 2) {
             this.ah = 353825;
             this.ag = 3175492;
-            this.a(0.6F, 0.6F);
+            this.setTemperatureHumidity(0.6F, 0.6F);
         }
 
         if(this.aF == 0) {
@@ -159,7 +159,7 @@ public class BiomeForest extends BiomeBase {
         if(this.id == BiomeBase.FOREST.id) {
             BiomeForest biomeforest = new BiomeForest(this.id + 128, 1);
 
-            biomeforest.a(new BiomeTemperature(this.am, this.an + 0.2F));
+            biomeforest.setTemperatureHumidity(new BiomeTemperature(this.am, this.an + 0.2F));
             biomeforest.a("Flower Forest");
             biomeforest.a(6976549, true);
             biomeforest.a(8233509);

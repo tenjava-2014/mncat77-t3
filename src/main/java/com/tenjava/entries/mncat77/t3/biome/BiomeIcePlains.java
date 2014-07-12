@@ -54,7 +54,7 @@ public class BiomeIcePlains extends BiomeBase {
 
     @Override
     protected BiomeBase k() {
-        BiomeBase biomebase = (new BiomeIcePlains(this.id + 128, true)).a(13828095, true).a(this.af + " Spikes").c().a(0.0F, 0.5F).a(new BiomeTemperature(this.am + 0.1F, this.an + 0.1F));
+        BiomeBase biomebase = (new BiomeIcePlains(this.id + 128, true)).a(13828095, true).a(this.af + " Spikes").c().setTemperatureHumidity(0.0F, 0.5F).setTemperatureHumidity(new BiomeTemperature(this.am + 0.1F, this.an + 0.1F));
 
         biomebase.am = this.am + 0.3F;
         biomebase.an = this.an + 0.4F;

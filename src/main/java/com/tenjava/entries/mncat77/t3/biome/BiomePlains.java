@@ -12,8 +12,8 @@ public class BiomePlains extends BiomeBase {
 
     protected BiomePlains(int i) {
         super(i);
-        this.a(0.8F, 0.4F);
-        this.a(e);
+        this.setTemperatureHumidity(0.8F, 0.4F);
+        this.setTemperatureHumidity(e);
         this.at.add(new BiomeMeta(EntityHorse.class, 5, 2, 6));
         this.decorator.x = -999;
         this.decorator.y = 4;

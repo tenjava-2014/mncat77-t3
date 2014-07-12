@@ -11,6 +11,7 @@ import net.minecraft.server.v1_7_R3.WorldGenerator;
 
 public class WorldGenWhirl extends WorldGenerator {
 
+    //Goodies that can be in the chests
     private static final StructurePieceTreasure[] a = new StructurePieceTreasure[]{new StructurePieceTreasure(Items.MELON, 0, 2, 5, 10), new StructurePieceTreasure(Items.APPLE, 0, 2, 5, 10), new StructurePieceTreasure(Items.PUMPKIN_PIE, 0, 1, 1, 1)};
 
     @Override

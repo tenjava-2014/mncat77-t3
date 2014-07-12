@@ -24,7 +24,7 @@ public class BiomeMesa extends BiomeBase {
         this.aH = flag;
         this.aI = flag1;
         this.b();
-        this.a(2.0F, 0.0F);
+        this.setTemperatureHumidity(2.0F, 0.0F);
         this.at.clear();
         this.topBlock = Blocks.SAND;
         this.aj = 1;
@@ -286,7 +286,7 @@ public class BiomeMesa extends BiomeBase {
         BiomeMesa biomemesa = new BiomeMesa(this.id + 128, flag, this.aI);
 
         if(!flag) {
-            biomemesa.a(g);
+            biomemesa.setTemperatureHumidity(g);
             biomemesa.a(this.af + " M");
         }
         else {

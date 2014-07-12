@@ -13,6 +13,7 @@ import net.minecraft.server.v1_7_R3.WorldGenerator;
 
 public class WorldGenDungeons extends WorldGenerator {
 
+    //Goodies that can be in the chests
     private static final StructurePieceTreasure[] a = new StructurePieceTreasure[]{new StructurePieceTreasure(Items.PUMPKIN_PIE, 0, 1, 1, 10), new StructurePieceTreasure(Items.DIAMOND, 0, 1, 5, 8), new StructurePieceTreasure(Items.IRON_INGOT, 0, 1, 4, 10), new StructurePieceTreasure(Items.BREAD, 0, 1, 1, 10), new StructurePieceTreasure(Items.GOLDEN_APPLE, 0, 1, 2, 1), new StructurePieceTreasure(Items.NAME_TAG, 0, 1, 1, 10), new StructurePieceTreasure(Items.HORSE_ARMOR_GOLD, 0, 1, 1, 2), new StructurePieceTreasure(Items.HORSE_ARMOR_IRON, 0, 1, 1, 5), new StructurePieceTreasure(Items.HORSE_ARMOR_DIAMOND, 0, 1, 1, 1)};
 
     public WorldGenDungeons() {
@@ -147,6 +148,7 @@ public class WorldGenDungeons extends WorldGenerator {
         }
     }
 
+    //Randomize Spawner Mob Type
     private String a(Random random) {
         int i = random.nextInt(5);
         switch(i) {

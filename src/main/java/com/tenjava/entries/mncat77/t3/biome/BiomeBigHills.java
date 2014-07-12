@@ -84,8 +84,8 @@ public class BiomeBigHills extends BiomeBase {
         this.aH = this.aG;
         this.a(biomebase.ag, true);
         this.a(biomebase.af + " M");
-        this.a(new BiomeTemperature(biomebase.am, biomebase.an));
-        this.a(biomebase.temperature, biomebase.humidity);
+        this.setTemperatureHumidity(new BiomeTemperature(biomebase.am, biomebase.an));
+        this.setTemperatureHumidity(biomebase.temperature, biomebase.humidity);
         return this;
     }
 
