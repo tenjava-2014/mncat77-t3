@@ -38,13 +38,16 @@ This plugin changes up world generation, tweaks spawn rates and adds some struct
 Survival is mainly made harder with this.
 
 Look out for:
--Dungeons
--"Clouds"
--Patches of TNT
--Whirls in the Desert
+ * Dungeons
+ * "Clouds"
+ * Patches of TNT
+ * Whirls in the Desert
+ * Rare very powerful mobs as random spawns
+ * and more
 
 
-I really messed up my time schedule and ended up wasting about 5 hours of time D:
+
+I really messed up my time schedule and ended up wasting about 5 hours of time D: (started 1 hour late, because of trip before it and the other 4 hours were wasted on Biome Layers)
 
 <!-- Hi, mncat77! This is the default README for every ten.java submission. -->
 <!-- We encourage you to edit this README with some information about your submission – keep in mind you'll be scored on documentation! -->
