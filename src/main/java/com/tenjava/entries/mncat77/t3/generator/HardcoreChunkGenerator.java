@@ -87,7 +87,7 @@ public class HardcoreChunkGenerator extends InternalChunkGenerator {
     public void a(int i, int j, Block[] ablock) {
         byte b0 = 63;
 
-        this.z = this.n.getWorldChunkManager().getBiomes(this.z, i * 4 - 2, j * 4 - 2, 10, 10);
+        this.z = this.n.getWorldChunkManager().getBiomes(this.z, i * 4 - 2, j * 4 - 2, 10, 10); //Layer stuff later
         this.a(i * 4, 0, j * 4);
 
         for(int k = 0; k < 4; ++k) {
@@ -177,7 +177,7 @@ public class HardcoreChunkGenerator extends InternalChunkGenerator {
         byte[] abyte = new byte[65536];
 
         this.a(i, j, ablock);
-        this.z = this.n.getWorldChunkManager().getBiomeBlock(this.z, i * 16, j * 16, 16, 16);
+        this.z = this.n.getWorldChunkManager().getBiomeBlock(this.z, i * 16, j * 16, 16, 16); //Layer stuff later
         this.a(i, j, ablock, abyte, this.z);
         this.t.a(this, this.n, i, j, ablock);
         this.y.a(this, this.n, i, j, ablock);
@@ -317,7 +317,7 @@ public class HardcoreChunkGenerator extends InternalChunkGenerator {
         BlockFalling.instaFall = true;
         int k = i * 16;
         int l = j * 16;
-        BiomeBase biomebase = this.n.getBiome(k + 16, l + 16);
+        BiomeBase biomebase = null;//Layer stuff
 
         this.i.setSeed(this.n.getSeed());
         long i1 = this.i.nextLong() / 2L * 2L + 1L;
@@ -362,7 +362,7 @@ public class HardcoreChunkGenerator extends InternalChunkGenerator {
         }
 
         biomebase.a(this.n, this.i, k, l);
-        SpawnerCreature.a(this.n, biomebase, k + 8, l + 8, 16, 16, this.i);
+        SpawnerCreature.a(this.n, biomebase, k + 8, l + 8, 16, 16, this.i);//Layer stuff later
         k += 8;
         l += 8;
 
@@ -403,7 +403,7 @@ public class HardcoreChunkGenerator extends InternalChunkGenerator {
 
     @Override
     public List getMobsFor(EnumCreatureType enumcreaturetype, int i, int j, int k) {
-        BiomeBase biomebase = this.n.getBiome(i, k);
+        BiomeBase biomebase = BiomeBase.getBiome(this.n.getBiome(i, k).id); //Layer stuff later
 
         return enumcreaturetype == EnumCreatureType.MONSTER && this.x.a(i, j, k) ? this.x.b() : biomebase.getMobs(enumcreaturetype);
     }

@@ -22,40 +22,40 @@ import net.minecraft.server.v1_7_R3.WorldGenerator;
 
 public class BiomeDecorator {
 
-    protected World a;
-    protected Random b;
-    protected int c;
-    protected int d;
-    protected WorldGenerator e = new WorldGenClay(4);
-    protected WorldGenerator f;
-    protected WorldGenerator g;
-    protected WorldGenerator h;
-    protected WorldGenerator i;
-    protected WorldGenerator j;
-    protected WorldGenerator k;
-    protected WorldGenerator l;
-    protected WorldGenerator m;
-    protected WorldGenerator n;
-    protected WorldGenerator o;
-    protected WorldGenFlowers p;
-    protected WorldGenerator q;
-    protected WorldGenerator r;
-    protected WorldGenerator s;
-    protected WorldGenerator t;
-    protected WorldGenerator u;
-    protected WorldGenerator v;
-    protected int w;
-    protected int x;
-    protected int y;
-    protected int z;
-    protected int A;
-    protected int B;
-    protected int C;
-    protected int D;
-    protected int E;
-    protected int F;
-    protected int G;
-    protected int H;
+    public World a;
+    public Random b;
+    public int c;
+    public int d;
+    public WorldGenerator e = new WorldGenClay(4);
+    public WorldGenerator f;
+    public WorldGenerator g;
+    public WorldGenerator h;
+    public WorldGenerator i;
+    public WorldGenerator j;
+    public WorldGenerator k;
+    public WorldGenerator l;
+    public WorldGenerator m;
+    public WorldGenerator n;
+    public WorldGenerator o;
+    public WorldGenFlowers p;
+    public WorldGenerator q;
+    public WorldGenerator r;
+    public WorldGenerator s;
+    public WorldGenerator t;
+    public WorldGenerator u;
+    public WorldGenerator v;
+    public int w;
+    public int x;
+    public int y;
+    public int z;
+    public int A;
+    public int B;
+    public int C;
+    public int D;
+    public int E;
+    public int F;
+    public int G;
+    public int H;
     public boolean I;
 
     public BiomeDecorator() {
@@ -99,7 +99,7 @@ public class BiomeDecorator {
         }
     }
 
-    protected void a(BiomeBase biomebase) {
+    public void a(BiomeBase biomebase) {
         this.a();
 
         int i;
@@ -136,7 +136,7 @@ public class BiomeDecorator {
             k = this.c + this.b.nextInt(16) + 8;
             l = this.d + this.b.nextInt(16) + 8;
             i1 = this.a.getHighestBlockYAt(k, l);
-            WorldGenTreeAbstract worldgentreeabstract = biomebase.a(this.b);
+            WorldGenTreeAbstract worldgentreeabstract = biomebase.getTreeGen(this.b);
 
             worldgentreeabstract.a(1.0D, 1.0D, 1.0D);
             if(worldgentreeabstract.a(this.a, this.b, k, i1, l)) {
@@ -154,7 +154,7 @@ public class BiomeDecorator {
             k = this.c + this.b.nextInt(16) + 8;
             l = this.d + this.b.nextInt(16) + 8;
             i1 = this.b.nextInt(this.a.getHighestBlockYAt(k, l) + 32);
-            String s = biomebase.a(this.b, k, i1, l);
+            String s = biomebase.getFlowerName(this.b, k, i1, l);
             BlockFlowers blockflowers = BlockFlowers.e(s);
 
             if(blockflowers.getMaterial() != Material.AIR) {
@@ -167,7 +167,7 @@ public class BiomeDecorator {
             k = this.c + this.b.nextInt(16) + 8;
             l = this.d + this.b.nextInt(16) + 8;
             i1 = this.b.nextInt(this.a.getHighestBlockYAt(k, l) * 2);
-            WorldGenerator worldgenerator = biomebase.b(this.b);
+            WorldGenerator worldgenerator = biomebase.createGrassGen(this.b);
 
             worldgenerator.a(this.a, this.b, k, i1, l);
         }
@@ -265,7 +265,7 @@ public class BiomeDecorator {
         }
     }
 
-    protected void a(int i, WorldGenerator worldgenerator, int j, int k) {
+    public void a(int i, WorldGenerator worldgenerator, int j, int k) {
         for(int l = 0; l < i; ++l) {
             int i1 = this.c + this.b.nextInt(16);
             int j1 = this.b.nextInt(k - j) + j;
@@ -275,7 +275,7 @@ public class BiomeDecorator {
         }
     }
 
-    protected void b(int i, WorldGenerator worldgenerator, int j, int k) {
+    public void b(int i, WorldGenerator worldgenerator, int j, int k) {
         for(int l = 0; l < i; ++l) {
             int i1 = this.c + this.b.nextInt(16);
             int j1 = this.b.nextInt(k) + this.b.nextInt(k) + (j - k);
@@ -285,7 +285,7 @@ public class BiomeDecorator {
         }
     }
 
-    protected void a() {
+    public void a() {
         this.a(20, this.h, 0, 256);
         this.a(10, this.i, 0, 256);
         this.a(20, this.j, 0, 128);

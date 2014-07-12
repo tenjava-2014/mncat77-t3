@@ -40,7 +40,7 @@ import org.bukkit.block.Biome;
 
 public abstract class BiomeBase {
 
-    //All the biomes as constants
+    //Who named this class BiomeTemperature? ._. It wraps around Humidity aswell
     protected static final BiomeTemperature a = new BiomeTemperature(0.1F, 0.2F);
     protected static final BiomeTemperature b = new BiomeTemperature(-0.5F, 0.0F);
     protected static final BiomeTemperature c = new BiomeTemperature(-1.0F, 0.1F);
@@ -54,8 +54,9 @@ public abstract class BiomeBase {
     protected static final BiomeTemperature k = new BiomeTemperature(0.1F, 0.8F);
     protected static final BiomeTemperature l = new BiomeTemperature(0.2F, 0.3F);
     protected static final BiomeTemperature m = new BiomeTemperature(-0.2F, 0.1F);
-    private static final BiomeBase[] biomes = new BiomeBase[256];
+    private static final BiomeBase[] byId = new BiomeBase[256];
     public static final Set n = Sets.newHashSet();
+    //All the biomes as constants
     public static final BiomeBase OCEAN = (new BiomeOcean(0)).b(112).a("Ocean").a(c);
     public static final BiomeBase PLAINS = (new BiomePlains(1)).b(9286496).a("Plains");
     public static final BiomeBase DESERT = (new BiomeDesert(2)).b(16421912).a("Desert").b().a(2.0F, 0.0F).a(e);
@@ -102,8 +103,10 @@ public abstract class BiomeBase {
     public String af;
     public int ag;
     public int ah;
+    //topb
     public Block ai;
     public int aj;
+    //fillb
     public Block ak;
     public int al;
     public float am;
@@ -111,6 +114,7 @@ public abstract class BiomeBase {
     public float temperature;
     public float humidity;
     public int aq;
+    //dec
     public BiomeDecorator ar;
     protected List as;
     protected List at;
@@ -123,7 +127,7 @@ public abstract class BiomeBase {
     protected WorldGenBigTree aA;
     protected WorldGenSwampTree aB;
 
-    protected BiomeBase(int i) {
+    protected BiomeBase(int id) {
         this.ai = Blocks.GRASS;
         this.aj = 0;
         this.ak = Blocks.DIRT;
@@ -141,9 +145,9 @@ public abstract class BiomeBase {
         this.az = new WorldGenTrees(false);
         this.aA = new WorldGenBigTree(false);
         this.aB = new WorldGenSwampTree();
-        this.id = i;
-        biomes[i] = this;
-        this.ar = this.a();
+        this.id = id;
+        byId[id] = this;
+        this.ar = this.createBiomeDecorator();
         this.at.add(new BiomeMeta(EntitySheep.class, 12, 4, 4));
         this.at.add(new BiomeMeta(EntityPig.class, 10, 4, 4));
         this.at.add(new BiomeMeta(EntityChicken.class, 10, 4, 4));
@@ -159,7 +163,7 @@ public abstract class BiomeBase {
         this.av.add(new BiomeMeta(EntityBat.class, 10, 8, 8));
     }
 
-    protected BiomeDecorator a() {
+    protected BiomeDecorator createBiomeDecorator() {
         return new BiomeDecorator();
     }
 
@@ -185,15 +189,15 @@ public abstract class BiomeBase {
         return this;
     }
 
-    public WorldGenTreeAbstract a(Random random) {
+    public WorldGenTreeAbstract getTreeGen(Random random) {
         return (WorldGenTreeAbstract)(random.nextInt(10) == 0 ? this.aA : this.az);
     }
 
-    public WorldGenerator b(Random random) {
+    public WorldGenerator createGrassGen(Random random) {
         return new WorldGenGrass(Blocks.LONG_GRASS, 1);
     }
 
-    public String a(Random random, int i, int j, int k) {
+    public String getFlowerName(Random random, int i, int j, int k) {
         return random.nextInt(3) > 0 ? BlockFlowers.b[0] : BlockFlowers.a[0];
     }
 
@@ -374,12 +378,12 @@ public abstract class BiomeBase {
     }
 
     public static BiomeBase[] getBiomes() {
-        return biomes;
+        return byId;
     }
 
     public static BiomeBase getBiome(int i) {
-        if(i >= 0 && i <= biomes.length) {
-            return biomes[i];
+        if(i >= 0 && i <= byId.length) {
+            return byId[i];
         }
         else {
             return OCEAN;
@@ -407,8 +411,8 @@ public abstract class BiomeBase {
         MEGA_TAIGA.k();
         EXTREME_HILLS.k();
         EXTREME_HILLS_PLUS.k();
-        biomes[MEGA_TAIGA_HILLS.id + 128] = biomes[MEGA_TAIGA.id + 128];
-        BiomeBase[] abiomebase = biomes;
+        byId[MEGA_TAIGA_HILLS.id + 128] = byId[MEGA_TAIGA.id + 128];
+        BiomeBase[] abiomebase = byId;
         int i = abiomebase.length;
 
         for(int j = 0; j < i; ++j) {
@@ -438,10 +442,6 @@ public abstract class BiomeBase {
     /*The corresponding Bukkit biome
      */
     protected Biome bukkitBiome;
-
-    /*All the BiomeBases accessible with their id as array index
-     */
-    public static final BiomeBase[] byId = new BiomeBase[]{/*OCEAN*/};
 
     public boolean equals(BiomeBase other) {
         return other == this ? true : (other == null ? false : this.getClass() == other.getClass());
