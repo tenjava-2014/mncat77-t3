@@ -257,18 +257,25 @@ public class BiomeDecorator {
             (new WorldGenPumpkin()).a(this.a, this.b, j, l, k);
         }
 
-        if(this.b.nextInt(32) == 0) {
+        if(this.b.nextInt(24) == 0) {
             j = this.c + this.b.nextInt(16) + 8;
             k = this.d + this.b.nextInt(16) + 8;
             l = this.b.nextInt(Math.max(this.a.getHighestBlockYAt(j, k) * 2, 1));
             melons.a(this.a, this.b, j, l, k);
         }
 
-        if(this.b.nextInt(40) == 0) {
+        if(this.b.nextInt(32) == 0) {
             j = this.c + this.b.nextInt(16) + 8;
             k = this.d + this.b.nextInt(16) + 8;
             l = this.b.nextInt(Math.max(this.a.getHighestBlockYAt(j, k) * 2, 1));
             tnt.a(this.a, this.b, j, l, k);
+        }
+
+        if(this.b.nextInt(128) == 0) {
+            j = this.c + this.b.nextInt(16) + 8;
+            k = this.d + this.b.nextInt(16) + 8;
+            l = this.b.nextInt(Math.max(this.a.getHighestBlockYAt(j, k) * 2, 1));
+            clouds.a(this.a, this.b, j, l, k);
         }
 
         for(j = 0; j < this.D; ++j) {

@@ -123,7 +123,6 @@ public class WorldGenDungeons extends WorldGenerator {
                     break;
                 }
             }
-            System.out.println(i + ";" + j + ";" + k);
             String m = this.a(random);
             for(int x = -1; x < 2; x++) {
                 for(int z = -1; z < 2; z++) {

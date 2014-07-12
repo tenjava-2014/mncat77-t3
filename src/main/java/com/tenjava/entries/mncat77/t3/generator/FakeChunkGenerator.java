@@ -13,7 +13,7 @@ public class FakeChunkGenerator extends ChunkGenerator {
         for(int x = 0; x < 16; x++) {
             for(int z = 0; z < 16; z++) {
                 for(int y = 0; y < 80; y++) {
-                    setBlock(x, y, z, chunk, (byte)57);
+                    setBlock(x, y, z, chunk, (byte)7);
                 }
             }
         }

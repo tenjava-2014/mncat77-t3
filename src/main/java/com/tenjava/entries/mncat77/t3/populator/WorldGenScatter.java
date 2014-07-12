@@ -30,16 +30,18 @@ public class WorldGenScatter extends WorldGenerator {
             int k1 = k + random.nextInt(8) - random.nextInt(8);
 
             if(b.canPlace(world, i1, j1, k1) && (((!c) && (world.getType(i1, j1, k1) == Blocks.GRASS)) || (c && (j1 > world.getHighestBlockYAt(i1, k1))))) {
-                if(random.nextInt(64) == 0) {
+                world.setTypeAndData(i1, j1, k1, b, 0, 2);
+                if(random.nextInt(32) == 0) {
                     world.setTypeAndData(i1, j1, k1, Blocks.TRAPPED_CHEST, 0, 2);
+                    world.setTypeAndData(i1, j1 - 1, k1, b, 0, 2);
                     StructurePieceTreasure[] astructurepiecetreasure = StructurePieceTreasure.a(a);
                     TileEntityChest tileentitychest = (TileEntityChest)world.getTileEntity(i1, j1, k1);
 
                     if(tileentitychest != null) {
                         StructurePieceTreasure.a(random, astructurepiecetreasure, (IInventory)tileentitychest, 8);
                     }
+                    return true;
                 }
-                world.setTypeAndData(i1, j1, k1, b, 0, 2);
             }
         }
 
