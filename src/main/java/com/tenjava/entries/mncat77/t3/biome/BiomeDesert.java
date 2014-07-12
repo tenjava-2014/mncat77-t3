@@ -17,6 +17,7 @@ public class BiomeDesert extends BiomeBase {
         this.decorator.C = 50;
         this.decorator.D = 10;
         this.at.clear();
+        this.decorator.whirls = true;
     }
 
     @Override

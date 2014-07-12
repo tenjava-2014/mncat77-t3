@@ -13,7 +13,7 @@ import net.minecraft.server.v1_7_R3.WorldGenerator;
 
 public class WorldGenDungeons extends WorldGenerator {
 
-    private static final StructurePieceTreasure[] a = new StructurePieceTreasure[]{new StructurePieceTreasure(Items.SADDLE, 0, 1, 1, 10), new StructurePieceTreasure(Items.IRON_INGOT, 0, 1, 4, 10), new StructurePieceTreasure(Items.BREAD, 0, 1, 1, 10), new StructurePieceTreasure(Items.WHEAT, 0, 1, 4, 10), new StructurePieceTreasure(Items.SULPHUR, 0, 1, 4, 10), new StructurePieceTreasure(Items.STRING, 0, 1, 4, 10), new StructurePieceTreasure(Items.BUCKET, 0, 1, 1, 10), new StructurePieceTreasure(Items.GOLDEN_APPLE, 0, 1, 1, 1), new StructurePieceTreasure(Items.REDSTONE, 0, 1, 4, 10), new StructurePieceTreasure(Items.RECORD_1, 0, 1, 1, 10), new StructurePieceTreasure(Items.RECORD_2, 0, 1, 1, 10), new StructurePieceTreasure(Items.NAME_TAG, 0, 1, 1, 10), new StructurePieceTreasure(Items.HORSE_ARMOR_GOLD, 0, 1, 1, 2), new StructurePieceTreasure(Items.HORSE_ARMOR_IRON, 0, 1, 1, 5), new StructurePieceTreasure(Items.HORSE_ARMOR_DIAMOND, 0, 1, 1, 1)};
+    private static final StructurePieceTreasure[] a = new StructurePieceTreasure[]{new StructurePieceTreasure(Items.PUMPKIN_PIE, 0, 1, 1, 10), new StructurePieceTreasure(Items.DIAMOND, 0, 1, 5, 8), new StructurePieceTreasure(Items.IRON_INGOT, 0, 1, 4, 10), new StructurePieceTreasure(Items.BREAD, 0, 1, 1, 10), new StructurePieceTreasure(Items.GOLDEN_APPLE, 0, 1, 2, 1), new StructurePieceTreasure(Items.NAME_TAG, 0, 1, 1, 10), new StructurePieceTreasure(Items.HORSE_ARMOR_GOLD, 0, 1, 1, 2), new StructurePieceTreasure(Items.HORSE_ARMOR_IRON, 0, 1, 1, 5), new StructurePieceTreasure(Items.HORSE_ARMOR_DIAMOND, 0, 1, 1, 1)};
 
     public WorldGenDungeons() {
     }
@@ -77,7 +77,7 @@ public class WorldGenDungeons extends WorldGenerator {
                 l1 = 0;
 
                 while(true) {
-                    if(l1 < 3) {
+                    if(l1 < 5) {
                         label101:
                         {
                             i2 = i + random.nextInt(l * 2 + 1) - l;
@@ -103,7 +103,7 @@ public class WorldGenDungeons extends WorldGenerator {
                                 }
 
                                 if(k2 == 1) {
-                                    world.setTypeAndData(i2, j, j2, Blocks.CHEST, 0, 2);
+                                    world.setTypeAndData(i2, j, j2, Blocks.TRAPPED_CHEST, 0, 2);
                                     StructurePieceTreasure[] astructurepiecetreasure = StructurePieceTreasure.a(a, new StructurePieceTreasure[]{Items.ENCHANTED_BOOK.b(random)});
                                     TileEntityChest tileentitychest = (TileEntityChest)world.getTileEntity(i2, j, j2);
 
@@ -129,7 +129,7 @@ public class WorldGenDungeons extends WorldGenerator {
                 for(int z = -1; z < 2; z++) {
                     if(Math.abs(x) + Math.abs(z) < 2) {
                         world.setTypeAndData(i + x, j - 1, k + z, Blocks.MOB_SPAWNER, 0, 2);
-                        TileEntityMobSpawner tileentitymobspawner = (TileEntityMobSpawner)world.getTileEntity(i, j, k);
+                        TileEntityMobSpawner tileentitymobspawner = (TileEntityMobSpawner)world.getTileEntity(i + x, j - 1, k + z);
 
                         if(tileentitymobspawner != null) {
                             tileentitymobspawner.a().a(m);
@@ -149,8 +149,20 @@ public class WorldGenDungeons extends WorldGenerator {
     }
 
     private String a(Random random) {
-        int i = random.nextInt(4);
-
-        return i == 0 ? "Skeleton" : (i == 1 ? "Zombie" : (i == 2 ? "Zombie" : (i == 3 ? "Spider" : "")));
+        int i = random.nextInt(5);
+        switch(i) {
+            case 0:
+                return "Skeleton";
+            case 1:
+                return "Zombie";
+            case 2:
+                return "Spider";
+            case 3:
+                return "CaveSpider";
+            case 4:
+                return "Enderman";
+            default:
+                return "";
+        }
     }
 }

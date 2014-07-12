@@ -1,6 +1,8 @@
 package com.tenjava.entries.mncat77.t3.generator;
 
 import com.tenjava.entries.mncat77.t3.biome.BiomeBase;
+import com.tenjava.entries.mncat77.t3.populator.WorldGenScatter;
+import com.tenjava.entries.mncat77.t3.populator.WorldGenWhirl;
 import java.util.Random;
 import net.minecraft.server.v1_7_R3.BlockFlowers;
 import net.minecraft.server.v1_7_R3.Blocks;
@@ -12,6 +14,7 @@ import net.minecraft.server.v1_7_R3.WorldGenDeadBush;
 import net.minecraft.server.v1_7_R3.WorldGenFlowers;
 import net.minecraft.server.v1_7_R3.WorldGenHugeMushroom;
 import net.minecraft.server.v1_7_R3.WorldGenLiquids;
+import net.minecraft.server.v1_7_R3.WorldGenMelon;
 import net.minecraft.server.v1_7_R3.WorldGenMinable;
 import net.minecraft.server.v1_7_R3.WorldGenPumpkin;
 import net.minecraft.server.v1_7_R3.WorldGenReed;
@@ -40,11 +43,10 @@ public class BiomeDecorator {
     public WorldGenFlowers p;
     public WorldGenerator q;
     public WorldGenerator r;
-    public WorldGenerator s;
-    public WorldGenerator t;
+    public WorldGenerator mushroom;
+    public WorldGenerator reed;
     public WorldGenerator u;
-    public WorldGenerator v;
-    public int orem;
+    public WorldGenerator lily;
     public int w;
     public int x;
     public int y;
@@ -56,28 +58,35 @@ public class BiomeDecorator {
     public int E;
     public int F;
     public int G;
-    public int H;
+    public int H = 1;
     public boolean I;
+    public boolean whirls = false;
+    public WorldGenWhirl whirl = new WorldGenWhirl();
+    public WorldGenMelon melons;
+    public WorldGenScatter tnt;
+    public WorldGenScatter clouds;
 
     public BiomeDecorator() {
-        this.orem = 1;
-        this.f = new WorldGenSand(Blocks.SAND, 7);
-        this.g = new WorldGenSand(Blocks.GRAVEL, 6);
+        this.f = new WorldGenSand(Blocks.SAND, 16);
+        this.g = new WorldGenSand(Blocks.GRAVEL, 32);
         this.h = new WorldGenMinable(Blocks.DIRT, 32);
         this.i = new WorldGenMinable(Blocks.GRAVEL, 32);
-        this.coal = new WorldGenMinable(Blocks.COAL_ORE, 16);
-        this.iron = new WorldGenMinable(Blocks.IRON_ORE, 8);
-        this.gold = new WorldGenMinable(Blocks.GOLD_ORE, 8);
-        this.m = new WorldGenMinable(Blocks.REDSTONE_ORE, 7);
-        this.diamond = new WorldGenMinable(Blocks.DIAMOND_ORE, 7);
+        this.coal = new WorldGenMinable(Blocks.COAL_ORE, 7);
+        this.iron = new WorldGenMinable(Blocks.IRON_ORE, 5);
+        this.gold = new WorldGenMinable(Blocks.GOLD_ORE, 4);
+        this.m = new WorldGenMinable(Blocks.REDSTONE_ORE, 6);
+        this.diamond = new WorldGenMinable(Blocks.DIAMOND_ORE, 4);
         this.o = new WorldGenMinable(Blocks.LAPIS_ORE, 6);
         this.p = new WorldGenFlowers(Blocks.YELLOW_FLOWER);
         this.q = new WorldGenFlowers(Blocks.BROWN_MUSHROOM);
+        this.melons = new WorldGenMelon();
+        this.tnt = new WorldGenScatter(Blocks.TNT, false);
+        this.clouds = new WorldGenScatter(Blocks.SNOW_BLOCK, true);
         this.r = new WorldGenFlowers(Blocks.RED_MUSHROOM);
-        this.s = new WorldGenHugeMushroom();
-        this.t = new WorldGenReed();
+        this.mushroom = new WorldGenHugeMushroom();
+        this.reed = new WorldGenReed();
         this.u = new WorldGenCactus();
-        this.v = new WorldGenWaterLily();
+        this.lily = new WorldGenWaterLily();
         this.y = 2;
         this.z = 1;
         this.E = 1;
@@ -134,22 +143,20 @@ public class BiomeDecorator {
         int l;
         int i1;
 
-        for(j = 0; j < i; ++j) {
-            k = this.c + this.b.nextInt(16) + 8;
-            l = this.d + this.b.nextInt(16) + 8;
-            i1 = this.a.getHighestBlockYAt(k, l);
-            WorldGenTreeAbstract worldgentreeabstract = biomebase.getTreeGen(this.b);
+        k = this.c + this.b.nextInt(16) + 8;
+        l = this.d + this.b.nextInt(16) + 8;
+        i1 = this.a.getHighestBlockYAt(k, l);
+        WorldGenTreeAbstract worldgentreeabstract = biomebase.getTreeGen(this.b);
 
-            worldgentreeabstract.a(1.0D, 1.0D, 1.0D);
-            if(worldgentreeabstract.a(this.a, this.b, k, i1, l)) {
-                worldgentreeabstract.b(this.a, this.b, k, i1, l);
-            }
+        worldgentreeabstract.a(1.0D, 1.0D, 1.0D);
+        if(worldgentreeabstract.a(this.a, this.b, k, i1, l)) {
+            worldgentreeabstract.b(this.a, this.b, k, i1, l);
         }
 
         for(j = 0; j < this.H; ++j) {
             k = this.c + this.b.nextInt(16) + 8;
             l = this.d + this.b.nextInt(16) + 8;
-            this.s.a(this.a, this.b, k, this.a.getHighestBlockYAt(k, l), l);
+            this.mushroom.a(this.a, this.b, k, this.a.getHighestBlockYAt(k, l), l);
         }
 
         for(j = 0; j < this.y; ++j) {
@@ -181,6 +188,13 @@ public class BiomeDecorator {
             (new WorldGenDeadBush(Blocks.DEAD_BUSH)).a(this.a, this.b, k, i1, l);
         }
 
+        if(whirls && this.b.nextInt(20) == 0) {
+            k = this.c + this.b.nextInt(16) + 8;
+            l = this.d + this.b.nextInt(16) + 8;
+            i1 = this.a.getHighestBlockYAt(k, l);
+            whirl.a(this.a, this.b, k, i1, l);
+        }
+
         for(j = 0; j < this.w; ++j) {
             k = this.c + this.b.nextInt(16) + 8;
             l = this.d + this.b.nextInt(16) + 8;
@@ -189,7 +203,7 @@ public class BiomeDecorator {
                 ;
             }
 
-            this.v.a(this.a, this.b, k, i1, l);
+            this.lily.a(this.a, this.b, k, i1, l);
         }
 
         for(j = 0; j < this.B; ++j) {
@@ -226,14 +240,14 @@ public class BiomeDecorator {
             k = this.c + this.b.nextInt(16) + 8;
             l = this.d + this.b.nextInt(16) + 8;
             i1 = this.b.nextInt(Math.max(this.a.getHighestBlockYAt(k, l) * 2, 1));
-            this.t.a(this.a, this.b, k, i1, l);
+            this.reed.a(this.a, this.b, k, i1, l);
         }
 
         for(j = 0; j < 10; ++j) {
             k = this.c + this.b.nextInt(16) + 8;
             l = this.d + this.b.nextInt(16) + 8;
             i1 = this.b.nextInt(Math.max(this.a.getHighestBlockYAt(k, l) * 2, 1));
-            this.t.a(this.a, this.b, k, i1, l);
+            this.reed.a(this.a, this.b, k, i1, l);
         }
 
         if(this.b.nextInt(32) == 0) {
@@ -241,6 +255,20 @@ public class BiomeDecorator {
             k = this.d + this.b.nextInt(16) + 8;
             l = this.b.nextInt(Math.max(this.a.getHighestBlockYAt(j, k) * 2, 1));
             (new WorldGenPumpkin()).a(this.a, this.b, j, l, k);
+        }
+
+        if(this.b.nextInt(32) == 0) {
+            j = this.c + this.b.nextInt(16) + 8;
+            k = this.d + this.b.nextInt(16) + 8;
+            l = this.b.nextInt(Math.max(this.a.getHighestBlockYAt(j, k) * 2, 1));
+            melons.a(this.a, this.b, j, l, k);
+        }
+
+        if(this.b.nextInt(40) == 0) {
+            j = this.c + this.b.nextInt(16) + 8;
+            k = this.d + this.b.nextInt(16) + 8;
+            l = this.b.nextInt(Math.max(this.a.getHighestBlockYAt(j, k) * 2, 1));
+            tnt.a(this.a, this.b, j, l, k);
         }
 
         for(j = 0; j < this.D; ++j) {
@@ -251,14 +279,14 @@ public class BiomeDecorator {
         }
 
         if(this.I) {
-            for(j = 0; j < 50; ++j) {
+            for(j = 0; j < 20; ++j) {
                 k = this.c + this.b.nextInt(16) + 8;
                 l = this.b.nextInt(this.b.nextInt(248) + 8);
                 i1 = this.d + this.b.nextInt(16) + 8;
                 (new WorldGenLiquids(Blocks.WATER)).a(this.a, this.b, k, l, i1);
             }
 
-            for(j = 0; j < 20; ++j) {
+            for(j = 0; j < 50; ++j) {
                 k = this.c + this.b.nextInt(16) + 8;
                 l = this.b.nextInt(this.b.nextInt(this.b.nextInt(240) + 8) + 8);
                 i1 = this.d + this.b.nextInt(16) + 8;
@@ -290,8 +318,8 @@ public class BiomeDecorator {
     public void a() {
         this.a(20, this.h, 0, 256);
         this.a(10, this.i, 0, 256);
-        this.a(20, this.coal, 0, 128);
-        this.a(20, this.iron, 0, 64);
+        this.a(10, this.coal, 0, 128);
+        this.a(10, this.iron, 0, 64);
         this.a(2, this.gold, 0, 32);
         this.a(8, this.m, 0, 16);
         this.a(1, this.diamond, 0, 16);

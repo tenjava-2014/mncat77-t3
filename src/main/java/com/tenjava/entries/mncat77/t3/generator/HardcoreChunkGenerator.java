@@ -25,8 +25,13 @@ import net.minecraft.server.v1_7_R3.NoiseGeneratorOctaves;
 import net.minecraft.server.v1_7_R3.WeightedRandom;
 import net.minecraft.server.v1_7_R3.World;
 import net.minecraft.server.v1_7_R3.WorldGenBase;
+import net.minecraft.server.v1_7_R3.WorldGenCanyon;
 import net.minecraft.server.v1_7_R3.WorldGenCaves;
 import net.minecraft.server.v1_7_R3.WorldGenLakes;
+import net.minecraft.server.v1_7_R3.WorldGenLargeFeature;
+import net.minecraft.server.v1_7_R3.WorldGenMineshaft;
+import net.minecraft.server.v1_7_R3.WorldGenStronghold;
+import net.minecraft.server.v1_7_R3.WorldGenVillage;
 import net.minecraft.server.v1_7_R3.WorldType;
 import org.bukkit.craftbukkit.v1_7_R3.generator.InternalChunkGenerator;
 
@@ -103,12 +108,12 @@ public class HardcoreChunkGenerator extends InternalChunkGenerator {
     private final float[] distanceFactorMatrix5x5;
     private double[] doubles256 = new double[256];
     private final double[] doubles825;
-    //private final WorldGenBase genCanyon = new WorldGenCanyon();
+    private final WorldGenBase genCanyon = new WorldGenCanyon();
     private final WorldGenBase genCaves = new WorldGenCaves();
-    //private final WorldGenLargeFeature genLargeFeature = new WorldGenLargeFeature();
-    //private final WorldGenMineshaft genMineshaft = new WorldGenMineshaft();
-    //private final WorldGenStronghold genStronghold = new WorldGenStronghold();
-    //private final WorldGenVillage genVillage = new WorldGenVillage();
+    private final WorldGenLargeFeature genLargeFeature = new WorldGenLargeFeature();
+    private final WorldGenMineshaft genMineshaft = new WorldGenMineshaft();
+    private final WorldGenStronghold genStronghold = new WorldGenStronghold();
+    private final WorldGenVillage genVillage = new WorldGenVillage();
     private final boolean generateFeatures;
     private final GenLayer layer;
     private final GenLayer layer2;
@@ -197,7 +202,7 @@ public class HardcoreChunkGenerator extends InternalChunkGenerator {
                                 }
                                 else if(yOuter * 8 + yInner < waterLevel) {
                                     int i = (zOuter * 4 + zInner) * 16 + xInner + xOuter * 4;
-                                    ablock[j3 += short1] = Blocks.STATIONARY_WATER;
+                                    ablock[j3 += short1] = Blocks.STATIONARY_LAVA;
                                 }
                                 else {
                                     ablock[j3 += short1] = null;
@@ -246,7 +251,7 @@ public class HardcoreChunkGenerator extends InternalChunkGenerator {
 
     @Override
     public ChunkPosition findNearestMapFeature(World world, String s, int i, int j, int k) {
-        return null;//return "Stronghold".equals(s) && this.genStronghold != null ? this.genStronghold.getNearestGeneratedFeature(world, i, j, k) : null;
+        return "Stronghold".equals(s) && this.genStronghold != null ? this.genStronghold.getNearestGeneratedFeature(world, i, j, k) : null;
     }
 
     @Override
@@ -269,10 +274,10 @@ public class HardcoreChunkGenerator extends InternalChunkGenerator {
         boolean flag = false;
 
         if(this.generateFeatures) {
-            //this.genMineshaft.a(this.world, this.rand, chunkX, chunkZ);
-            //flag = this.genVillage.a(this.world, this.rand, chunkX, chunkZ);
-            //this.genStronghold.a(this.world, this.rand, chunkX, chunkZ);
-            //this.genLargeFeature.a(this.world, this.rand, chunkX, chunkZ);
+            this.genMineshaft.a(this.world, this.rand, chunkX, chunkZ);
+            flag = this.genVillage.a(this.world, this.rand, chunkX, chunkZ);
+            this.genStronghold.a(this.world, this.rand, chunkX, chunkZ);
+            this.genLargeFeature.a(this.world, this.rand, chunkX, chunkZ);
         }
 
         int x;
@@ -280,12 +285,12 @@ public class HardcoreChunkGenerator extends InternalChunkGenerator {
         //Various uses
         int tempvar;
 
-        /*if(biomebase != BiomeBase.SPAWN && biomebase != BiomeBase.DESERT && biomebase != BiomeBase.DESERT_HILLS && !flag && this.rand.nextInt(4) == 0) {
-         x = realX + this.rand.nextInt(16) + 8;
-         z = this.rand.nextInt(256);
-         tempvar = realZ + this.rand.nextInt(16) + 8;
-         (new WorldGenLakes(Blocks.STATIONARY_WATER)).a(this.world, this.rand, x, z, tempvar);
-         }*/
+        if(biomebase != BiomeBase.DESERT && biomebase != BiomeBase.DESERT_HILLS && !flag && this.rand.nextInt(4) == 0) {
+            x = realX + this.rand.nextInt(16) + 8;
+            z = this.rand.nextInt(256);
+            tempvar = realZ + this.rand.nextInt(16) + 8;
+            (new WorldGenLakes(Blocks.STATIONARY_WATER)).a(this.world, this.rand, x, z, tempvar);
+        }
         if(!flag && this.rand.nextInt(8) == 0) {
             x = realX + this.rand.nextInt(16) + 8;
             z = this.rand.nextInt(this.rand.nextInt(248) + 8);
@@ -431,12 +436,12 @@ public class HardcoreChunkGenerator extends InternalChunkGenerator {
     public List getMobsFor(EnumCreatureType enumcreaturetype, int x, int y, int z) {
         BiomeBase biomebase = BiomeBase.byId[layer.a(x, z, 1, 1)[0]];
 
-        return /*enumcreaturetype == EnumCreatureType.MONSTER && this.genLargeFeature.a(x, y, z) ? this.genLargeFeature.b() :*/ biomebase.getMobs(enumcreaturetype);
+        return enumcreaturetype == EnumCreatureType.MONSTER && this.genLargeFeature.a(x, y, z) ? this.genLargeFeature.b() : biomebase.getMobs(enumcreaturetype);
     }
 
     @Override
     public String getName() {
-        return "TatakaiChunkGenerator";
+        return "HardcoreChunkGenerator";
     }
 
     //Start here...
@@ -453,54 +458,16 @@ public class HardcoreChunkGenerator extends InternalChunkGenerator {
 
         //Populate
         this.genCaves.a(this, this.world, chunkX, chunkZ, blocks);
-        //this.genCanyon.a(this, this.world, chunkX, chunkZ, blocks);
+        this.genCanyon.a(this, this.world, chunkX, chunkZ, blocks);
         if(this.generateFeatures) {
-            //this.genMineshaft.a(this, this.world, chunkX, chunkZ, blocks);
-            //this.genVillage.a(this, this.world, chunkX, chunkZ, blocks);
-            //this.genStronghold.a(this, this.world, chunkX, chunkZ, blocks);
-            //this.genLargeFeature.a(this, this.world, chunkX, chunkZ, blocks);
+            this.genMineshaft.a(this, this.world, chunkX, chunkZ, blocks);
+            this.genVillage.a(this, this.world, chunkX, chunkZ, blocks);
+            this.genStronghold.a(this, this.world, chunkX, chunkZ, blocks);
+            this.genLargeFeature.a(this, this.world, chunkX, chunkZ, blocks);
         }
 
         Chunk chunk = new Chunk(this.world, blocks, types, chunkX, chunkZ);
         byte[] cBiomes = chunk.m();
-
-        for(int k = 0; k < cBiomes.length; ++k) {
-            byte b;
-            switch(this.biomes[k]) {
-                default:
-                    b = (byte)this.biomes[k];
-                    break;
-
-                case 40:
-                case 41:
-                    b = 1;
-                    break;
-
-                case 42:
-                case 43:
-                case 44:
-                case 47:
-                case 50:
-                    b = 9;
-                    break;
-
-                case 45:
-                    //hmmmm
-                    b = -117;
-                    break;
-
-                case 46:
-                    b = 29;
-                    break;
-
-                case 48:
-                case 49:
-                    b = 8;
-                    break;
-            }
-            cBiomes[k] = b;
-
-        }
 
         chunk.initLighting();
         return chunk;
@@ -514,10 +481,10 @@ public class HardcoreChunkGenerator extends InternalChunkGenerator {
     @Override
     public void recreateStructures(int chunkX, int chunkZ) {
         if(this.generateFeatures) {
-            //this.genMineshaft.a(this, this.world, chunkX, chunkZ, (Block[])null);
-            //this.genVillage.a(this, this.world, chunkX, chunkZ, (Block[])null);
-            //this.genStronghold.a(this, this.world, chunkX, chunkZ, (Block[])null);
-            //this.genLargeFeature.a(this, this.world, chunkX, chunkZ, (Block[])null);
+            this.genMineshaft.a(this, this.world, chunkX, chunkZ, (Block[])null);
+            this.genVillage.a(this, this.world, chunkX, chunkZ, (Block[])null);
+            this.genStronghold.a(this, this.world, chunkX, chunkZ, (Block[])null);
+            this.genLargeFeature.a(this, this.world, chunkX, chunkZ, (Block[])null);
         }
     }
 
