@@ -69,7 +69,7 @@ public abstract class BiomeLayer {
         BiomeLayerSmooth layerSmooth1 = new BiomeLayerSmooth(seed - 15, layer3);
         BiomeLayerRiverMix layerRiverMix = new BiomeLayerRiverMix(seed + 16, layerSmooth1, layerSmooth);
         BiomeLayerZoomVoronoi layerZoomVoronoi = new BiomeLayerZoomVoronoi(seed - 16, layerRiverMix);
-        return new BiomeLayer[]{layerRiverMix, layerZoomVoronoi};
+        return new BiomeLayer[]{layerZoomVoronoi, layerRiverMix};
     }
 
     protected static boolean biomeEquals(int biome1Id, int biome2Id) {
@@ -157,7 +157,7 @@ public abstract class BiomeLayer {
     }
 
     protected int choose(int... choices) {
-        return choices[this.choose(choices.length)];
+        return choices[this.nextInt(choices.length)];
     }
 
     protected int chooseZoom(int choice1, int choice2, int choice3, int choice4) {

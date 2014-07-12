@@ -2,6 +2,7 @@ package com.tenjava.entries.mncat77.t3.generator;
 
 import com.tenjava.entries.mncat77.t3.biome.BiomeBase;
 import com.tenjava.entries.mncat77.t3.layer.BiomeLayer;
+import com.tenjava.entries.mncat77.t3.populator.WorldGenDungeons;
 import java.util.Collection;
 import java.util.List;
 import java.util.Random;
@@ -26,7 +27,6 @@ import net.minecraft.server.v1_7_R3.World;
 import net.minecraft.server.v1_7_R3.WorldGenBase;
 import net.minecraft.server.v1_7_R3.WorldGenCanyon;
 import net.minecraft.server.v1_7_R3.WorldGenCaves;
-import net.minecraft.server.v1_7_R3.WorldGenDungeons;
 import net.minecraft.server.v1_7_R3.WorldGenLakes;
 import net.minecraft.server.v1_7_R3.WorldGenLargeFeature;
 import net.minecraft.server.v1_7_R3.WorldGenMineshaft;
@@ -157,7 +157,7 @@ public class HardcoreChunkGenerator extends InternalChunkGenerator {
             }
         }
 
-        BiomeLayer[] layers = BiomeLayer.initBiomeLayers(world.getSeed());
+        BiomeLayer[] layers = BiomeLayer.initBiomeLayers(seed);
         this.layer = layers[0];
         this.layer2 = layers[1];
     }
@@ -437,10 +437,10 @@ public class HardcoreChunkGenerator extends InternalChunkGenerator {
     }
 
     @Override
-    public List getMobsFor(EnumCreatureType enumcreaturetype, int i, int j, int k) {
-        BiomeBase biomebase = BiomeBase.getBiome(this.world.getBiome(i, k).id); //Layer stuff later
+    public List getMobsFor(EnumCreatureType enumcreaturetype, int x, int y, int z) {
+        BiomeBase biomebase = BiomeBase.byId[layer.getValues(x, z, 1, 1)[0]];
 
-        return enumcreaturetype == EnumCreatureType.MONSTER && this.genLargeFeature.a(i, j, k) ? this.genLargeFeature.b() : biomebase.getMobs(enumcreaturetype);
+        return enumcreaturetype == EnumCreatureType.MONSTER && this.genLargeFeature.a(x, y, z) ? this.genLargeFeature.b() : biomebase.getMobs(enumcreaturetype);
     }
 
     @Override
