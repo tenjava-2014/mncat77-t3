@@ -13,7 +13,8 @@ public class BiomeLayerIslands extends BiomeLayer {
         for(int x = 0; x < length; x++) {
             int a = realX + x;
             for(int z = 0; z < width; z++) {
-                values[z + x * width] = this.nextInt(10, a, realZ + z) == 0 ? 1 : 0;
+                this.initChunkSeed(a, realZ + z);
+                values[z + x * width] = this.nextInt(10) == 0 ? 1 : 0;
             }
         }
 

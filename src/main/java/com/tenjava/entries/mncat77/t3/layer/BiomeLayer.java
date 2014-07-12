@@ -5,6 +5,7 @@ public abstract class BiomeLayer {
     protected BiomeLayer parent;
 
     protected long baseSeed;
+    private long chunkSeed;
 
     /**
      * Init all the layers to create the final biome providing layers
@@ -50,33 +51,47 @@ public abstract class BiomeLayer {
     public abstract int[] getValues(int realX, int realZ, int width, int length);
 
     /**
+     * Inits Chunk seed for specified position
+     *
+     * @param realX The X-Offset
+     * @param realZ The Z-Offset
+     */
+    protected void initChunkSeed(int realX, int realZ) {
+        chunkSeed = this.baseSeed;
+        chunkSeed *= this.baseSeed * 6364136223846793005L + 1442695040888963407L;
+        chunkSeed += realX;
+        chunkSeed *= this.baseSeed * 6364136223846793005L + 1442695040888963407L;
+        chunkSeed += realZ;
+        chunkSeed *= this.baseSeed * 6364136223846793005L + 1442695040888963407L;
+        chunkSeed += realX;
+        chunkSeed *= this.baseSeed * 6364136223846793005L + 1442695040888963407L;
+        chunkSeed += realZ;
+    }
+
+    /**
      * Generates a pseudo-random number for the layers
      *
      * @param max The maximum value the number should be (not inclusive)
-     * @param realX The X-Offset for the random number in Blocks (I don't want
-     * to init chunkseeds all the time)
-     * @param realZ The Z-Offset for the random number in Blocks (I don't want
-     * to init chunkseeds all the time)
      * @return A pseudo-random number generated with the baseSeed and the
      * parameters
      */
-    protected int nextInt(int max, int realX, int realZ) {
-        long chunkSeed = this.baseSeed;
-        chunkSeed *= this.baseSeed * 6364136223846793005L + 1442695040888963407L;
-        chunkSeed += realX;
-        chunkSeed *= this.baseSeed * 6364136223846793005L + 1442695040888963407L;
-        chunkSeed += realZ;
-        chunkSeed *= this.baseSeed * 6364136223846793005L + 1442695040888963407L;
-        chunkSeed += realX;
-        chunkSeed *= this.baseSeed * 6364136223846793005L + 1442695040888963407L;
-        chunkSeed += realZ;
-
-        int rand = (int)((chunkSeed >> 24) % (long)max);
+    protected int nextInt(int max) {
+        int rand = (int)((this.chunkSeed >> 24) % (long)max);
 
         if(rand < 0) {
             rand += max;
         }
+        this.chunkSeed *= this.chunkSeed * 6364136223846793005L + 1442695040888963407L;
+        this.chunkSeed += this.baseSeed;
         return rand;
+    }
+
+    protected int choose(int... choices) {
+        return choices[this.choose(choices.length)];
+    }
+
+    protected int chooseZoom(int choice1, int choice2, int choice3, int choice4) {
+        return choice2 == choice3 && choice3 == choice4 ? choice2 : (choice1 == choice2 && choice1 == choice3 ? choice1 : (choice1 == choice2 && choice1 == choice4 ? choice1 : (choice1 == choice3 && choice1 == choice4 ? choice1 : (choice1 == choice2 && choice3 != choice4 ? choice1 : (choice1 == choice3 && choice2 != choice4 ? choice1 : (choice1 == choice4 && choice2 != choice3 ? choice1 : (choice2 == choice3 && choice1 != choice4 ? choice2 : (choice2 == choice4 && choice1 != choice3 ? choice2 : (choice3 == choice4 && choice1 != choice2 ? choice3 : this.choose(new int[]{choice1, choice2, choice3, choice4}))))))))));
     }
 
 }
