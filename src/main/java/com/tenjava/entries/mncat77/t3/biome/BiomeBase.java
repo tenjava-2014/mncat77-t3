@@ -53,7 +53,7 @@ public abstract class BiomeBase {
     protected static final BiomeTemperature k = new BiomeTemperature(0.1F, 0.8F);
     protected static final BiomeTemperature l = new BiomeTemperature(0.2F, 0.3F);
     protected static final BiomeTemperature m = new BiomeTemperature(-0.2F, 0.1F);
-    private static final BiomeBase[] byId = new BiomeBase[256];
+    public static final BiomeBase[] byId = new BiomeBase[256];
     public static final Set n = Sets.newHashSet();
     //All the biomes as constants
     public static final BiomeBase OCEAN = (new BiomeOcean(0)).b(112).a("Ocean").a(c);
