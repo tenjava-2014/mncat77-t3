@@ -14,9 +14,17 @@ public abstract class BiomeLayer {
      * @return The layers providing the final biomes
      */
     public static BiomeLayer[] initBiomeLayers(long seed) {
-        BiomeLayer layer = new BiomeLayerIslands(seed);
-        layer = new BiomeLayerZoomFuzzy(seed, layer);
-        return new BiomeLayer[]{layer};
+        BiomeLayer layerIsland = new BiomeLayerIslands(seed);
+        BiomeLayer layerZoomFuzzy = new BiomeLayerZoomFuzzy(seed + 1, layerIsland);
+        BiomeLayer layerIslands = new BiomeLayerAddToIslands(seed - 1, layerZoomFuzzy);
+        BiomeLayer layerZoom = new BiomeLayerZoom(seed + 2, layerIslands);
+
+        layerIslands = new BiomeLayerAddToIslands(seed - 2, layerZoom);
+        layerIslands = new BiomeLayerAddToIslands(seed + 3, layerIslands);
+        layerIslands = new BiomeLayerAddToIslands(seed - 3, layerIslands);
+        BiomeLayer layerIcePlains = new BiomeLayerIcePlains(seed + 4, layerIslands);
+
+        return new BiomeLayer[]{null};
     }
 
     /**
