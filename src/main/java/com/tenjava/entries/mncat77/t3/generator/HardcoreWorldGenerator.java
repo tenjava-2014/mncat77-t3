@@ -23,7 +23,7 @@ public class HardcoreWorldGenerator extends ChunkGenerator {
     public HardcoreWorldGenerator(long seed) {
         this.seed = seed;
         //TODO: init pops
-        layers = BiomeLayer.initBiomeLayers();
+        layers = BiomeLayer.initBiomeLayers(this.seed);
         this.noise = new SimplexOctaveGenerator(this.seed, 8);
         this.noise.setScale(1.0D / 256.0D);
     }
