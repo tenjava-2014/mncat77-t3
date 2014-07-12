@@ -13,7 +13,28 @@ public abstract class BiomeLayer {
      * @return The layers providing the final biomes
      */
     public static BiomeLayer[] initBiomeLayers(long seed) {
-        return new BiomeLayer[0];
+        BiomeLayer layer = new BiomeLayerIslands(seed);
+        return new BiomeLayer[]{layer};
+    }
+
+    /**
+     * Create a fresh BiomeLayer(only used by first layer)
+     *
+     * @param seed Seed for the BiomeLayer
+     */
+    protected BiomeLayer(long seed) {
+        this.baseSeed = seed;
+    }
+
+    /**
+     * Creates a BiomeLayer with a parent
+     *
+     * @param seed Seed for the BiomeLayer
+     * @param parent Parent for the BiomeLayer
+     */
+    protected BiomeLayer(long seed, BiomeLayer parent) {
+        this.baseSeed = seed;
+        this.parent = parent;
     }
 
     /**
