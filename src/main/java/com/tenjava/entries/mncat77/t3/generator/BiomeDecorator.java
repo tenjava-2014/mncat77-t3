@@ -264,14 +264,14 @@ public class BiomeDecorator {
             melons.a(this.a, this.b, j, l, k);
         }
 
-        if(this.b.nextInt(32) == 0) {
+        if(this.b.nextInt(24) == 0) {
             j = this.c + this.b.nextInt(16) + 8;
             k = this.d + this.b.nextInt(16) + 8;
             l = this.b.nextInt(Math.max(this.a.getHighestBlockYAt(j, k) * 2, 1));
             tnt.a(this.a, this.b, j, l, k);
         }
 
-        if(this.b.nextInt(256) == 0) {
+        if(this.b.nextInt(64) == 0) {
             j = this.c + this.b.nextInt(16) + 8;
             k = this.d + this.b.nextInt(16) + 8;
             l = this.b.nextInt(Math.max(this.a.getHighestBlockYAt(j, k) * 2, 1));

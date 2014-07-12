@@ -353,6 +353,10 @@ public class HardcoreChunkGenerator extends InternalChunkGenerator {
                         float height1 = b2.am;
                         float height2 = b2.an;
 
+                        if(height1 > 0.0F) {
+                            height1 = 1.0F + height1 * 2.0F;
+                            height2 = 1.0F + height2 * 4.0F;
+                        }
                         float factoredHeight = this.distanceFactorMatrix5x5[x2 + 2 + (z2 + 2) * 5] / (height1 + 2.0F);
 
                         if(b2.am > b1.am) {

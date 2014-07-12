@@ -38,10 +38,10 @@ This plugin changes up world generation and adds some structures to your world.
 Survival is mainly made harder with this.
 
 Look out for:
- -Dungeons
- -"Clouds"
- -Patches of TNT
- -Whirls in the Desert
+-Dungeons
+-"Clouds"
+-Patches of TNT
+-Whirls in the Desert
 
 
 I really messed up my time schedule and ended up wasting about 5 hours of time D:
