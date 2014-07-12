@@ -45,9 +45,13 @@ public abstract class BiomeBase {
     public static final BiomeBase MESA = (new BiomeMesa(37, false, false)).b(14238997).a("Mesa");
     public static final BiomeBase MESA_PLATEAU_F = (new BiomeMesa(38, false, true)).b(11573093).a("Mesa Plateau F").a(h);
     public static final BiomeBase MESA_PLATEAU = (new BiomeMesa(39, false, false)).b(13274213).a("Mesa Plateau").a(h);
+
+    public static Object getBiome(int id) {
+        return byId[id];
+    }
+
     /*An internal id for the biome
      */
-
     public final int id;
 
     /*The id of the material the top block will have, e.g. for plains grass.

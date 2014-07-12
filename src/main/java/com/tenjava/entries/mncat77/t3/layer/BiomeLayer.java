@@ -43,39 +43,61 @@ public abstract class BiomeLayer {
 
         BiomeLayer layer1 = BiomeLayerZoom.zoom(seed - 9, layer, 0);
         BiomeLayer layerCleaner = new BiomeLayerCleaner(seed + 10, layer1);
-        BiomeLayer object = new BiomeLayerBiome(seed - 10, layer);
+        BiomeLayer layer3 = new BiomeLayerBiome(seed - 10, layer);
 
-        /*         if(!flag) {
-         GenLayer genlayer2 = GenLayerZoom.b(1000L, (GenLayer)object, 2);
+        BiomeLayer layer2 = BiomeLayerZoom.zoom(seed + 11, layer3, 2);
 
-         object = new GenLayerDesert(1000L, genlayer2);
-         }
+        layer3 = new BiomeLayerDesert(seed - 11, layer2);
 
-         GenLayer genlayer3 = GenLayerZoom.b(1000L, genlayercleaner, 2);
-         GenLayerRegionHills genlayerregionhills = new GenLayerRegionHills(1000L, (GenLayer)object, genlayer3);
+        GenLayer genlayer3 = GenLayerZoom.b(1000L, genlayercleaner, 2);
+        GenLayerRegionHills genlayerregionhills = new GenLayerRegionHills(1000L, (GenLayer)layer3, genlayer3);
 
-         genlayer1 = GenLayerZoom.b(1000L, genlayercleaner, 2);
-         genlayer1 = GenLayerZoom.b(1000L, genlayer1, b0);
-         GenLayerRiver genlayerriver = new GenLayerRiver(1L, genlayer1);
-         GenLayerSmooth genlayersmooth = new GenLayerSmooth(1000L, genlayerriver);
+        genlayer1 = GenLayerZoom.b(1000L, genlayercleaner, 2);
+        genlayer1 = GenLayerZoom.b(1000L, genlayer1, b0);
+        GenLayerRiver genlayerriver = new GenLayerRiver(1L, genlayer1);
+        GenLayerSmooth genlayersmooth = new GenLayerSmooth(1000L, genlayerriver);
 
-         object = new GenLayerPlains(1001L, genlayerregionhills);
+        layer3 = new GenLayerPlains(1001L, genlayerregionhills);
 
-         for(int j = 0; j < b0; ++j) {
-         object = new GenLayerZoom((long)(1000 + j), (GenLayer)object);
-         if(j == 0) {
-         object = new GenLayerIsland(3L, (GenLayer)object);
-         }
+        for(int j = 0; j < b0; ++j) {
+            layer3 = new GenLayerZoom((long)(1000 + j), (GenLayer)layer3);
+            if(j == 0) {
+                layer3 = new GenLayerIsland(3L, (GenLayer)layer3);
+            }
 
-         if(j == 1) {
-         object = new GenLayerMushroomShore(1000L, (GenLayer)object);
-         }
-         }
+            if(j == 1) {
+                layer3 = new GenLayerMushroomShore(1000L, (GenLayer)layer3);
+            }
+        }
 
-         GenLayerSmooth genlayersmooth1 = new GenLayerSmooth(1000L, (GenLayer)object);
-         GenLayerRiverMix genlayerrivermix = new GenLayerRiverMix(100L, genlayersmooth1, genlayersmooth);
-         GenLayerZoomVoronoi genlayerzoomvoronoi = new GenLayerZoomVoronoi(10L, genlayerrivermix);*/
+        GenLayerSmooth genlayersmooth1 = new GenLayerSmooth(1000L, (GenLayer)layer3);
+        GenLayerRiverMix genlayerrivermix = new GenLayerRiverMix(100L, genlayersmooth1, genlayersmooth);
+        GenLayerZoomVoronoi genlayerzoomvoronoi = new GenLayerZoomVoronoi(10L, genlayerrivermix);
         return new BiomeLayer[]{null};
+    }
+
+    protected static boolean biomeEquals(int biome1Id, int biome2Id) {
+        if(biome1Id == biome2Id) {
+            return true;
+        }
+        else if(biome1Id != BiomeBase.MESA_PLATEAU_F.id && biome1Id != BiomeBase.MESA_PLATEAU.id) {
+            try {
+                return BiomeBase.getBiome(biome1Id) != null && BiomeBase.getBiome(biome2Id) != null ? BiomeBase.getBiome(biome1Id).a(BiomeBase.getBiome(biome2Id)) : false;
+            }
+            catch(Throwable throwable) {
+                CrashReport crashreport = CrashReport.a(throwable, "Comparing biomes");
+                CrashReportSystemDetails crashreportsystemdetails = crashreport.a("Biomes being compared");
+
+                crashreportsystemdetails.a("Biome A ID", Integer.valueOf(biome1Id));
+                crashreportsystemdetails.a("Biome B ID", Integer.valueOf(biome2Id));
+                crashreportsystemdetails.a("Biome A", (Callable)(new CrashReportGenLayer1(biome1Id)));
+                crashreportsystemdetails.a("Biome B", (Callable)(new CrashReportGenLayer2(biome2Id)));
+                throw new ReportedException(crashreport);
+            }
+        }
+        else {
+            return biome2Id == BiomeBase.MESA_PLATEAU_F.id || biome2Id == BiomeBase.MESA_PLATEAU.id;
+        }
     }
 
     protected static boolean isBiomeOcean(int i) {
