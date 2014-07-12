@@ -49,8 +49,8 @@ public abstract class BiomeLayer {
 
         layer3 = new BiomeLayerDesert(seed - 11, layer2);
 
-        GenLayer genlayer3 = GenLayerZoom.b(1000L, genlayercleaner, 2);
-        GenLayerRegionHills genlayerregionhills = new GenLayerRegionHills(1000L, (GenLayer)layer3, genlayer3);
+        BiomeLayer layer4 = BiomeLayerZoom.zoom(seed + 12, layerCleaner, 2);
+        BiomeLayer layerRegionHills = new BiomeLayerRegionHills(seed - 12, layer3, layer4);
 
         genlayer1 = GenLayerZoom.b(1000L, genlayercleaner, 2);
         genlayer1 = GenLayerZoom.b(1000L, genlayer1, b0);
