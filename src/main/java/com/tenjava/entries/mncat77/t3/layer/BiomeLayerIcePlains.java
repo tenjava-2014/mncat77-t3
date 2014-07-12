@@ -15,18 +15,18 @@ public class BiomeLayerIcePlains extends BiomeLayer {
         int[] parentValues = this.parent.getValues(parentRectX, parentRectZ, parentRectWidth, parentRectLength);
         int[] values = new int[width * length];
 
-        for(int x = 0; x < length; ++x) {
-            for(int z = 0; z < width; ++z) {
-                int parentValue1 = parentValues[z + 1 + (x) * (width + 2)];
-                int parentValue2 = parentValues[z + 2 + (x + 1) * (width + 2)];
-                int parentValue3 = parentValues[z + (x + 1) * (width + 2)];
-                int parentValue4 = parentValues[z + 1 + (x + 2) * (width + 2)];
-                int parentValue5 = parentValues[z + 1 + (x + 1) * parentRectWidth];
+        for(int z = 0; z < length; ++z) {
+            for(int x = 0; x < width; ++x) {
+                int parentValue1 = parentValues[x + 1 + (z) * (width + 2)];
+                int parentValue2 = parentValues[x + 2 + (z + 1) * (width + 2)];
+                int parentValue3 = parentValues[x + (z + 1) * (width + 2)];
+                int parentValue4 = parentValues[x + 1 + (z + 2) * (width + 2)];
+                int parentValue5 = parentValues[x + 1 + (z + 1) * parentRectWidth];
 
-                values[z + x * width] = parentValue5;
-                this.initChunkSeed(z + realX, x + realZ);
+                values[x + z * width] = parentValue5;
+                this.initChunkSeed(x + realX, z + realZ);
                 if(parentValue5 == 0 && parentValue1 == 0 && parentValue2 == 0 && parentValue3 == 0 && parentValue4 == 0 && this.nextInt(2) == 0) {
-                    values[z + x * width] = 1;
+                    values[x + z * width] = 1;
                 }
             }
         }
