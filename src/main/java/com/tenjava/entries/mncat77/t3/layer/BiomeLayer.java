@@ -36,6 +36,44 @@ public abstract class BiomeLayer {
         layerZoom = new BiomeLayerZoom(seed - 7, layerZoom);
         layerIslands = new BiomeLayerAddToIslands(seed + 8, layerZoom);
         //No mushroom islands, cause who will find 'em anyways, don't wanna change rarity either ; prolly waste of time?
+        BiomeLayer genlayerdeepocean = new BiomeLayerDeepOcean(seed - 8, layerIslands);
+        BiomeLayer layer = BiomeLayerZoom.zoom(seed + 9, genlayerdeepocean, 0);
+        byte biomeSize = 4;//large = 6; lemme fiddle with this later
+
+        BiomeLayer layer1 = BiomeLayerZoom.zoom(seed - 9, layer, 0);
+        BiomeLayer layerCleaner = new BiomeLayerCleaner(seed + 10, layer1);
+        /*BiomeLayer object = new GenLayerBiome(200L, genlayer, worldtype);
+
+         if(!flag) {
+         GenLayer genlayer2 = GenLayerZoom.b(1000L, (GenLayer)object, 2);
+
+         object = new GenLayerDesert(1000L, genlayer2);
+         }
+
+         GenLayer genlayer3 = GenLayerZoom.b(1000L, genlayercleaner, 2);
+         GenLayerRegionHills genlayerregionhills = new GenLayerRegionHills(1000L, (GenLayer)object, genlayer3);
+
+         genlayer1 = GenLayerZoom.b(1000L, genlayercleaner, 2);
+         genlayer1 = GenLayerZoom.b(1000L, genlayer1, b0);
+         GenLayerRiver genlayerriver = new GenLayerRiver(1L, genlayer1);
+         GenLayerSmooth genlayersmooth = new GenLayerSmooth(1000L, genlayerriver);
+
+         object = new GenLayerPlains(1001L, genlayerregionhills);
+
+         for(int j = 0; j < b0; ++j) {
+         object = new GenLayerZoom((long)(1000 + j), (GenLayer)object);
+         if(j == 0) {
+         object = new GenLayerIsland(3L, (GenLayer)object);
+         }
+
+         if(j == 1) {
+         object = new GenLayerMushroomShore(1000L, (GenLayer)object);
+         }
+         }
+
+         GenLayerSmooth genlayersmooth1 = new GenLayerSmooth(1000L, (GenLayer)object);
+         GenLayerRiverMix genlayerrivermix = new GenLayerRiverMix(100L, genlayersmooth1, genlayersmooth);
+         GenLayerZoomVoronoi genlayerzoomvoronoi = new GenLayerZoomVoronoi(10L, genlayerrivermix);*/
 
         return new BiomeLayer[]{null};
     }
