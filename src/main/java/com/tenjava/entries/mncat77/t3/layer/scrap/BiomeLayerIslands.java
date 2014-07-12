@@ -1,4 +1,4 @@
-package com.tenjava.entries.mncat77.t3.layer;
+package com.tenjava.entries.mncat77.t3.layer.scrap;
 
 public class BiomeLayerIslands extends BiomeLayer {
 
@@ -10,11 +10,11 @@ public class BiomeLayerIslands extends BiomeLayer {
     public int[] getValues(int realX, int realZ, int width, int length) {
         int[] values = new int[width * length];
 
-        for(int x = 0; x < length; x++) {
-            int a = realX + x;
-            for(int z = 0; z < width; z++) {
-                this.initChunkSeed(a, realZ + z);
-                values[z + x * width] = this.nextInt(10) == 0 ? 1 : 0;
+        for(int z = 0; z < length; z++) {
+            int a = realX + z;
+            for(int x = 0; x < width; x++) {
+                this.initChunkSeed(a, realZ + x);
+                values[x + z * width] = this.nextInt(10) == 0 ? 1 : 0;
             }
         }
 

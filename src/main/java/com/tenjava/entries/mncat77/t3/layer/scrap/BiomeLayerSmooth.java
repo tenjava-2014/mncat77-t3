@@ -1,4 +1,4 @@
-package com.tenjava.entries.mncat77.t3.layer;
+package com.tenjava.entries.mncat77.t3.layer.scrap;
 
 public class BiomeLayerSmooth extends BiomeLayer {
 

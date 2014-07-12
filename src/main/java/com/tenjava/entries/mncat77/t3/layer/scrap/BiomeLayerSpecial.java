@@ -1,4 +1,4 @@
-package com.tenjava.entries.mncat77.t3.layer;
+package com.tenjava.entries.mncat77.t3.layer.scrap;
 
 //I don't like this one
 import net.minecraft.server.v1_7_R3.EnumGenLayerSpecial;

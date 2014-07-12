@@ -1,3 +1,4 @@
 name: mncat77-t3
 main: com.tenjava.entries.mncat77.t3.TenJava
 version: '${project.version}'
+load: STARTUP

@@ -1,4 +1,4 @@
-package com.tenjava.entries.mncat77.t3.layer;
+package com.tenjava.entries.mncat77.t3.layer.scrap;
 
 import com.tenjava.entries.mncat77.t3.biome.BiomeBase;
 import net.minecraft.server.v1_7_R3.EnumGenLayerSpecial;
@@ -39,7 +39,7 @@ public abstract class BiomeLayer {
         //No mushroom islands, cause who will find 'em anyways, don't wanna change rarity either ; prolly waste of time?
         BiomeLayer genlayerdeepocean = new BiomeLayerDeepOcean(seed - 8, layerIslands);
         BiomeLayer layer = BiomeLayerZoom.zoom(seed + 9, genlayerdeepocean, 0);
-        byte biomeSize = 4;//large = 6; lemme fiddle with this later
+        byte biomeSize = 6;//large = 6; lemme fiddle with this later
 
         BiomeLayer layer1 = BiomeLayerZoom.zoom(seed - 9, layer, 0);
         BiomeLayer layerCleaner = new BiomeLayerCleaner(seed + 10, layer1);
@@ -68,7 +68,7 @@ public abstract class BiomeLayer {
 
         BiomeLayerSmooth layerSmooth1 = new BiomeLayerSmooth(seed - 15, layer3);
         BiomeLayerRiverMix layerRiverMix = new BiomeLayerRiverMix(seed + 16, layerSmooth1, layerSmooth);
-        BiomeLayerZoomVoronoi layerZoomVoronoi = new BiomeLayerZoomVoronoi(seed - 16, layerRiverMix);
+        BiomeLayer layerZoomVoronoi = BiomeLayerZoom.zoom(seed, layerRiverMix, 2);//new BiomeLayerZoomVoronoi(seed - 16, new BiomeLayerZoom(seed, layerRiverMix));
         return new BiomeLayer[]{layerZoomVoronoi, layerRiverMix};
     }
 

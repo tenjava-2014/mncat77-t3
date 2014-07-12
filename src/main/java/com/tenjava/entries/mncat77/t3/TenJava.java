@@ -1,7 +1,7 @@
 package com.tenjava.entries.mncat77.t3;
 
 import com.tenjava.entries.mncat77.t3.generator.FakeChunkGenerator;
-import com.tenjava.entries.mncat77.t3.generator.HardcoreChunkGenerator;
+import com.tenjava.entries.mncat77.t3.generator.HardcoreChunkGenerator1;
 import java.lang.reflect.Field;
 import net.minecraft.server.v1_7_R3.ChunkProviderServer;
 import net.minecraft.server.v1_7_R3.MinecraftServer;
@@ -16,6 +16,7 @@ public class TenJava extends JavaPlugin {
 
     @Override
     public void onEnable() {
+
         taskId = Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
 
             @Override
@@ -24,10 +25,10 @@ public class TenJava extends JavaPlugin {
                     WorldServer w = MinecraftServer.getServer().getWorldServer(0);
                     Field f = ChunkProviderServer.class.getDeclaredField("f");
                     f.setAccessible(true);
-                    HardcoreChunkGenerator gen = new HardcoreChunkGenerator(w);
+                    HardcoreChunkGenerator1 gen = new HardcoreChunkGenerator1(w);
                     w.generator = gen;
+                    //w.chunkProviderServer = new ChunkProviderServer(w, (IChunkLoader)f.get(w.chunkProviderServer), gen);
                     w.chunkProviderServer.chunkProvider = gen;
-                    System.out.println("Replaced!");
                     Bukkit.getScheduler().cancelTask(taskId);
                 }
                 catch(Exception e) {

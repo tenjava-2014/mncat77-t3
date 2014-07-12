@@ -96,6 +96,18 @@ public abstract class BiomeBase {
     public static final BiomeBase MESA = (new BiomeMesa(37, false, false)).b(14238997).a("Mesa");
     public static final BiomeBase MESA_PLATEAU_F = (new BiomeMesa(38, false, true)).b(11573093).a("Mesa Plateau F").a(h);
     public static final BiomeBase MESA_PLATEAU = (new BiomeMesa(39, false, false)).b(13274213).a("Mesa Plateau").a(h);
+
+    public static final BiomeBase PLAINS2 = new BiomePlains1(41);//41
+    public static final BiomeBase CORRUPTION1 = new BiomeCorruption1(42);//42
+    public static final BiomeBase CORRUPTION2 = new BiomeCorruption1(43);//43
+    public static final BiomeBase CORRUPTION3 = new BiomeCorruption1(44);//44
+    public static final BiomeBase ICE = new BiomeIce(45);//45
+    public static final BiomeBase SPOOKY_FOREST = new BiomeSpookyForest(46);//46
+    public static final BiomeBase CRYSTAL_SHARDS = new BiomeCrystalShards(47);//47
+    public static final BiomeBase MAGMA = new BiomeMagma(48);//48
+    public static final BiomeBase ABYSS = new BiomeAbyss(49);//49
+    public static final BiomeBase DUNGEONS = new BiomeDungeons(50);//50
+
     protected static final NoiseGenerator3 ac;
     protected static final NoiseGenerator3 ad;
     protected static final WorldGenTallPlant ae;
@@ -416,6 +428,7 @@ public abstract class BiomeBase {
 
             if(biomebase != null && biomebase.id < 128) {
                 n.add(biomebase);
+                byId[biomebase.id] = biomebase;
             }
         }
 
