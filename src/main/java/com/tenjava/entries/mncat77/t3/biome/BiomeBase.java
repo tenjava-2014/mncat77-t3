@@ -73,6 +73,10 @@ public abstract class BiomeBase {
         this.id = id;
     }
 
+    public boolean equals(BiomeBase other) {
+        return other == this ? true : (other == null ? false : this.getClass() == other.getClass());
+    }
+
     /**
      * Get the corresponding Bukkit biome
      *

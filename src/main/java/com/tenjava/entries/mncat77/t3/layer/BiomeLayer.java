@@ -67,9 +67,9 @@ public abstract class BiomeLayer {
         }
 
         BiomeLayerSmooth layerSmooth1 = new BiomeLayerSmooth(seed - 15, layer3);
-        BiomeLayerRiverMix genlayerrivermix = new BiomeLayerRiverMix(seed + 16, layerSmooth1, layerSmooth);
-        GenLayerZoomVoronoi genlayerzoomvoronoi = new GenLayerZoomVoronoi(10L, genlayerrivermix);
-        return new BiomeLayer[]{null};
+        BiomeLayerRiverMix layerRiverMix = new BiomeLayerRiverMix(seed + 16, layerSmooth1, layerSmooth);
+        BiomeLayerZoomVoronoi layerZoomVoronoi = new BiomeLayerZoomVoronoi(seed - 16, layerRiverMix);
+        return new BiomeLayer[]{layerRiverMix, layerZoomVoronoi};
     }
 
     protected static boolean biomeEquals(int biome1Id, int biome2Id) {
@@ -77,19 +77,7 @@ public abstract class BiomeLayer {
             return true;
         }
         else if(biome1Id != BiomeBase.MESA_PLATEAU_F.id && biome1Id != BiomeBase.MESA_PLATEAU.id) {
-            try {
-                return BiomeBase.getBiome(biome1Id) != null && BiomeBase.getBiome(biome2Id) != null ? BiomeBase.getBiome(biome1Id).a(BiomeBase.getBiome(biome2Id)) : false;
-            }
-            catch(Throwable throwable) {
-                CrashReport crashreport = CrashReport.a(throwable, "Comparing biomes");
-                CrashReportSystemDetails crashreportsystemdetails = crashreport.a("Biomes being compared");
-
-                crashreportsystemdetails.a("Biome A ID", Integer.valueOf(biome1Id));
-                crashreportsystemdetails.a("Biome B ID", Integer.valueOf(biome2Id));
-                crashreportsystemdetails.a("Biome A", (Callable)(new CrashReportGenLayer1(biome1Id)));
-                crashreportsystemdetails.a("Biome B", (Callable)(new CrashReportGenLayer2(biome2Id)));
-                throw new ReportedException(crashreport);
-            }
+            return BiomeBase.getBiome(biome1Id) != null && BiomeBase.getBiome(biome2Id) != null ? BiomeBase.getBiome(biome1Id).equals(BiomeBase.getBiome(biome2Id)) : false;
         }
         else {
             return biome2Id == BiomeBase.MESA_PLATEAU_F.id || biome2Id == BiomeBase.MESA_PLATEAU.id;
