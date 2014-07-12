@@ -24,6 +24,7 @@ public abstract class BiomeLayer {
         layerIslands = new BiomeLayerAddToIslands(seed - 3, layerIslands);
         BiomeLayer layerIcePlains = new BiomeLayerIcePlains(seed + 4, layerIslands);
         BiomeLayer layerTopSoil = new BiomeLayerTopSoil(seed - 4, layerIcePlains);
+        layerIslands = new BiomeLayerAddToIslands(seed + 5, layerTopSoil);
 
         return new BiomeLayer[]{null};
     }
