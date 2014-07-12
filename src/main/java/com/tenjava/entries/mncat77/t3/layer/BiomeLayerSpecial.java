@@ -27,88 +27,88 @@ public class BiomeLayerSpecial extends BiomeLayer {
         }
     }
 
-    private int[] getValuesCoolWarm(int i, int j, int k, int l) {
-        int i1 = i - 1;
-        int j1 = j - 1;
-        int k1 = 1 + k + 1;
-        int l1 = 1 + l + 1;
-        int[] aint = this.parent.getValues(i1, j1, k1, l1);
-        int[] aint1 = new int[k * l];
+    private int[] getValuesCoolWarm(int realX, int realZ, int width, int length) {
+        int parentRectX = realX - 1;
+        int parentRectZ = realZ - 1;
+        int parentRectWidth = 1 + width + 1;
+        int parentRectLength = 1 + length + 1;
+        int[] parentValues = this.parent.getValues(parentRectX, parentRectZ, parentRectWidth, parentRectLength);
+        int[] values = new int[width * length];
 
-        for(int i2 = 0; i2 < l; ++i2) {
-            for(int j2 = 0; j2 < k; ++j2) {
-                this.initChunkSeed(j2 + i, i2 + j);
-                int k2 = aint[j2 + 1 + (i2 + 1) * k1];
+        for(int z = 0; z < length; ++z) {
+            for(int x = 0; x < width; ++x) {
+                this.initChunkSeed(x + realX, z + realZ);
+                int k2 = parentValues[x + 1 + (z + 1) * parentRectWidth];
 
                 if(k2 == 1) {
-                    int l2 = aint[j2 + 1 + (i2 + 1 - 1) * k1];
-                    int i3 = aint[j2 + 1 + 1 + (i2 + 1) * k1];
-                    int j3 = aint[j2 + 1 - 1 + (i2 + 1) * k1];
-                    int k3 = aint[j2 + 1 + (i2 + 1 + 1) * k1];
-                    boolean flag = l2 == 3 || i3 == 3 || j3 == 3 || k3 == 3;
-                    boolean flag1 = l2 == 4 || i3 == 4 || j3 == 4 || k3 == 4;
+                    int parentValue1 = parentValues[x + 1 + (z + 1 - 1) * parentRectWidth];
+                    int parentValue2 = parentValues[x + 1 + 1 + (z + 1) * parentRectWidth];
+                    int parentValue3 = parentValues[x + 1 - 1 + (z + 1) * parentRectWidth];
+                    int parentValue4 = parentValues[x + 1 + (z + 1 + 1) * parentRectWidth];
+                    boolean flag = parentValue1 == 3 || parentValue2 == 3 || parentValue3 == 3 || parentValue4 == 3;
+                    boolean flag1 = parentValue1 == 4 || parentValue2 == 4 || parentValue3 == 4 || parentValue4 == 4;
 
                     if(flag || flag1) {
                         k2 = 2;
                     }
                 }
 
-                aint1[j2 + i2 * k] = k2;
+                values[x + z * width] = k2;
             }
         }
 
-        return aint1;
+        return values;
     }
 
-    private int[] getValuesHeatIce(int i, int j, int k, int l) {
-        int i1 = i - 1;
-        int j1 = j - 1;
-        int k1 = 1 + k + 1;
-        int l1 = 1 + l + 1;
-        int[] aint = this.parent.getValues(i1, j1, k1, l1);
-        int[] aint1 = new int[k * l];
+    private int[] getValuesHeatIce(int realX, int realZ, int width, int length) {
+        int parentRectX = realX - 1;
+        int parentRectZ = realZ - 1;
+        int parentRectWidth = 1 + width + 1;
+        int parentRectLength = 1 + length + 1;
+        int[] parentValues = this.parent.getValues(parentRectX, parentRectZ, parentRectWidth, parentRectLength);
+        int[] values = new int[width * length];
 
-        for(int i2 = 0; i2 < l; ++i2) {
-            for(int j2 = 0; j2 < k; ++j2) {
-                int k2 = aint[j2 + 1 + (i2 + 1) * k1];
+        for(int z = 0; z < length; ++z) {
+            for(int x = 0; x < width; ++x) {
+                int parentValue1 = parentValues[x + 1 + (z + 1) * parentRectWidth];
 
-                if(k2 == 4) {
-                    int l2 = aint[j2 + 1 + (i2 + 1 - 1) * k1];
-                    int i3 = aint[j2 + 1 + 1 + (i2 + 1) * k1];
-                    int j3 = aint[j2 + 1 - 1 + (i2 + 1) * k1];
-                    int k3 = aint[j2 + 1 + (i2 + 1 + 1) * k1];
-                    boolean flag = l2 == 2 || i3 == 2 || j3 == 2 || k3 == 2;
-                    boolean flag1 = l2 == 1 || i3 == 1 || j3 == 1 || k3 == 1;
+                if(parentValue1 == 4) {
+                    int parentValue2 = parentValues[x + 1 + (z + 1 - 1) * parentRectWidth];
+                    int parentValue3 = parentValues[x + 1 + 1 + (z + 1) * parentRectWidth];
+                    int parentValue4 = parentValues[x + 1 - 1 + (z + 1) * parentRectWidth];
+                    int parentValue5 = parentValues[x + 1 + (z + 1 + 1) * parentRectWidth];
+                    boolean flag = parentValue2 == 2 || parentValue3 == 2 || parentValue4 == 2 || parentValue5 == 2;
+                    boolean flag1 = parentValue2 == 1 || parentValue3 == 1 || parentValue4 == 1 || parentValue5 == 1;
 
                     if(flag1 || flag) {
-                        k2 = 3;
+                        parentValue1 = 3;
                     }
                 }
 
-                aint1[j2 + i2 * k] = k2;
+                values[x + z * width] = parentValue1;
             }
         }
 
-        return aint1;
+        return values;
     }
 
-    private int[] getValuesPufferfish(int i, int j, int k, int l) {
-        int[] aint = this.parent.getValues(i, j, k, l);
-        int[] aint1 = new int[k * l];
+    private int[] getValuesPufferfish(int realX, int realZ, int width, int length) {
+        int[] parentValues = this.parent.getValues(realX, realZ, width, length);
+        int[] values = new int[width * length];
 
-        for(int i1 = 0; i1 < l; ++i1) {
-            for(int j1 = 0; j1 < k; ++j1) {
-                this.initChunkSeed(j1 + i, i1 + j);
-                int k1 = aint[j1 + i1 * k];
+        for(int z = 0; z < length; ++z) {
+            for(int x = 0; x < width; ++x) {
+                this.initChunkSeed(x + realX, z + realZ);
+                int parentValue = parentValues[x + z * width];
 
-                if(k1 != 0 && this.nextInt(13) == 0) {
-                    k1 |= 1 + this.nextInt(15) << 8 & 3840;
+                if(parentValue != 0 && this.nextInt(13) == 0) {
+                    parentValue |= 1 + this.nextInt(15) << 8 & 3840;
                 }
 
-                aint1[j1 + i1 * k] = k1;
+                values[x + z * width] = parentValue;
             }
         }
 
-        return aint1;
+        return values;
     }
 }
