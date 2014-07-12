@@ -55,7 +55,7 @@ public abstract class BiomeLayer {
         layer1 = BiomeLayerZoom.zoom(seed + 13, layerCleaner, 2);
         layer1 = BiomeLayerZoom.zoom(seed - 13, layer1, biomeSize);
         BiomeLayer layerRiver = new BiomeLayerRiver(seed + 14, layer1);
-        GenLayerSmooth genlayersmooth = new GenLayerSmooth(1000L, genlayerriver);
+        BiomeLayerSmooth layerSmooth = new BiomeLayerSmooth(seed - 14, layerRiver);
 
         layer3 = new GenLayerPlains(1001L, genlayerregionhills);
 
